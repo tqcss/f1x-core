@@ -11,6 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,15 +25,24 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "CreatedAt must not be null")
     private LocalDateTime createdAt;
+
+    @NotNull(message = "UpdatedAt must not be null")
     private LocalDateTime updatedAt;
+
+    @NotNull(message = "Due date must not be null")
+    @Future(message = "Due date must be in the future")
     private LocalDateTime dueDate;
 
+    @NotNull(message = "Amount must not be null")
+    @Positive(message = "Amount must be positive")
     private Float amount;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @NotNull(message = "Customer must not be null")
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -43,9 +55,9 @@ public class Order {
     public Order(Customer customer, LocalDateTime dueDate, List<OrderItem> items) {
         LocalDateTime now = LocalDateTime.now();
 
-        if (dueDate.isBefore(now)) {
-            throw new IllegalArgumentException("Due date cannot be before the date today");
-        }
+//        if (dueDate.isBefore(now)) {
+//            throw new IllegalArgumentException("Due date cannot be before the date today");
+//        }
 
         this.status = OrderStatus.PENDING;
         this.createdAt = now;
