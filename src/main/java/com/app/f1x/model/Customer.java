@@ -27,9 +27,9 @@ public class Customer {
         this.email = email;
     }
 
+    public Long getId() { return id; }
     public String getFirstName() { return this.firstName; }
     public String getLastName() { return this.lastName; }
     public String getPhoneNumber() { return this.phoneNumber; }
     public String getEmail() { return this.email; }
-
 }
