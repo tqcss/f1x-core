@@ -1,7 +1,11 @@
 package com.app.f1x.controller;
 
+import com.app.f1x.dto.CreateOrderRequest;
+import com.app.f1x.model.Customer;
 import com.app.f1x.model.Order;
+import com.app.f1x.model.enums.OrderStatus;
 import com.app.f1x.repository.OrderRepository;
+import com.app.f1x.util.OrderMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +25,11 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final OrderMapper orderMapper;
 
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
+        this.orderMapper = orderMapper;
     }
 
     @GetMapping
@@ -39,7 +45,15 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createOrder(@Valid @RequestBody Order order) {
+    public ResponseEntity<String> createOrder(@Valid @RequestBody CreateOrderRequest request) {
+        Optional<Customer> customerOpt = customerRepository.findById(request.getCustomerId());
+        if (customerOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Invalid customer ID");
+        }
+
+        Customer customer = customerOpt.get();
+        Order order = orderMapper.toOrder(request, customer);
+
         orderRepository.create(order);
         return ResponseEntity.ok("Order created successfully");
     }
