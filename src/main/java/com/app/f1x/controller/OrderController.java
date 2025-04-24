@@ -26,12 +26,10 @@ public class OrderController {
 
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
-    private final OrderMapper orderMapper;
 
-    public OrderController(OrderRepository orderRepository, CustomerRepository customerRepository, OrderMapper orderMapper) {
+    public OrderController(OrderRepository orderRepository, CustomerRepository customerRepository) {
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
-        this.orderMapper = orderMapper;
     }
 
     @GetMapping
@@ -54,7 +52,7 @@ public class OrderController {
         }
 
         Customer customer = customerOpt.get();
-        Order order = orderMapper.toOrder(request, customer);
+        Order order = OrderMapper.toOrder(request, customer);
 
         orderRepository.create(order);
         return ResponseEntity.ok("Order created successfully");

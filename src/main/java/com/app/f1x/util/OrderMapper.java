@@ -7,7 +7,7 @@ import com.app.f1x.model.enums.OrderStatus;
 
 public class OrderMapper {
 
-    public Order toOrder(CreateOrderRequest request, Customer customer) {
+    public static Order toOrder(CreateOrderRequest request, Customer customer) {
         Order order = new Order();
         order.setDueDate(request.getDueDate());
         order.setAmount(request.getAmount());
