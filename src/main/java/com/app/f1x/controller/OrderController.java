@@ -3,7 +3,7 @@ package com.app.f1x.controller;
 import com.app.f1x.dto.CreateOrderRequest;
 import com.app.f1x.model.Customer;
 import com.app.f1x.model.Order;
-import com.app.f1x.model.enums.OrderStatus;
+import com.app.f1x.repository.CustomerRepository;
 import com.app.f1x.repository.OrderRepository;
 import com.app.f1x.util.OrderMapper;
 import jakarta.validation.Valid;
@@ -25,10 +25,12 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final CustomerRepository customerRepository;
     private final OrderMapper orderMapper;
 
-    public OrderController(OrderRepository orderRepository, OrderMapper orderMapper) {
+    public OrderController(OrderRepository orderRepository, CustomerRepository customerRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
+        this.customerRepository = customerRepository;
         this.orderMapper = orderMapper;
     }
 
@@ -46,7 +48,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<String> createOrder(@Valid @RequestBody CreateOrderRequest request) {
-        Optional<Customer> customerOpt = customerRepository.findById(request.getCustomerId());
+        Optional<Customer> customerOpt = customerRepository.getById(request.getCustomerId());
         if (customerOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("Invalid customer ID");
         }
