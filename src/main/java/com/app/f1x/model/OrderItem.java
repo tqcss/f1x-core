@@ -1,39 +1,68 @@
-package com.app.f1x.model;
-
-import com.app.f1x.model.enums.ServiceType;
-import jakarta.persistence.*;
-
-@Entity
-public class OrderItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private ServiceType serviceType;
-    private Integer quantity;
-    private Float unitPrice;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    public OrderItem() {}
-
-    public OrderItem(Order order, ServiceType serviceType, Integer quantity) {
-        this.serviceType = serviceType;
-        this.quantity = quantity;
-        this.order = order;
-
-        // to be implemented
-        // this.unitPrice = OrderService.calculateUnitPrice(serviceType, quantity);
-    }
-
-    public Long getId() { return this.id; }
-
-    public ServiceType getServiceType() { return this.serviceType; }
-    public Integer getQuantity() { return this.quantity; }
-    public Float getUnitPrice() { return this.unitPrice; }
-
-    public Order getOrder() {return this.order; }
-}
+//package com.app.f1x.model;
+//
+//import jakarta.persistence.Entity;
+//import jakarta.persistence.FetchType;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.JoinTable;
+//import jakarta.persistence.ManyToMany;
+//import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.Table;
+//import lombok.EqualsAndHashCode;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//
+//import java.util.List;
+//
+//@Entity
+//@Table(name = "order_items")
+//@Getter
+//@NoArgsConstructor
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//public class OrderItem {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @EqualsAndHashCode.Include
+//    private Long id;
+//
+//    @Setter
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "order_id", nullable = false)
+//    private Order order;
+//
+//    @Setter
+//    private String serviceName;
+//
+//    @Setter
+//    private Float serviceCost;
+//
+//    @Setter
+//    private Integer quantity;
+//
+//    @Setter
+//    private Float subtotalCost;
+//
+//    @Setter
+//    @ManyToMany
+//    @JoinTable(
+//            name = "required_order_product",
+//            joinColumns = @JoinColumn(name = "order_item_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id")
+//    )
+//    private List<Product> requiredProducts;
+//
+//    @Setter
+//    @ManyToMany
+//    @JoinTable(
+//            name = "optional_order_product",
+//            joinColumns = @JoinColumn(name = "order_item_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id")
+//    )
+//    private List<Product> optionalProducts;
+//
+//
+//}

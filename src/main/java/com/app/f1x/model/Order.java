@@ -1,97 +1,60 @@
-package com.app.f1x.model;
-
-import com.app.f1x.model.enums.OrderStatus;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Entity
-public class Order {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull(message = "CreatedAt must not be null")
-    private LocalDateTime createdAt;
-
-    @NotNull(message = "UpdatedAt must not be null")
-    private LocalDateTime updatedAt;
-
-    @NotNull(message = "Due date must not be null")
-    @Future(message = "Due date must be in the future")
-    private LocalDateTime dueDate;
-
-    @NotNull(message = "Amount must not be null")
-    @Positive(message = "Amount must be positive")
-    private Float amount;
-
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
-
-    @NotNull(message = "Customer must not be null")
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> items;
-
-    public Order() {}
-
-    public Order(Customer customer, LocalDateTime dueDate, List<OrderItem> items) {
-        LocalDateTime now = LocalDateTime.now();
-
-//        if (dueDate.isBefore(now)) {
-//            throw new IllegalArgumentException("Due date cannot be before the date today");
-//        }
-
-        this.status = OrderStatus.PENDING;
-        this.createdAt = now;
-        this.updatedAt = now;
-
-        this.customer = customer;
-        this.dueDate = dueDate;
-        this.items = items;
-
-        // to be implemented
-        // this.amount = OrderService.calculateCost()
-    }
-
-    private void updateDate() {
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    public Long getId() { return this.id; }
-
-    public LocalDateTime getCreatedAt() { return this.createdAt; }
-    public LocalDateTime getUpdatedAt() { return this.updatedAt; }
-    public LocalDateTime getDueDate() { return this.dueDate; }
-
-    public Float getAmount() { return this.amount; }
-    public OrderStatus getStatus() { return this.status; }
-    public Customer getCustomer() { return this.customer; }
-    public List<OrderItem> getItems() { return this.items; }
-
-    public void setDueDate(LocalDateTime dueDate) { updateDate(); this.dueDate = dueDate; }
-    public void setAmount(Float amount) { this.amount = amount; }
-    public void setStatus(OrderStatus status) { this.status = status; }
-    public void setCustomer(Customer customer) { updateDate(); this.customer = customer; }
-
-    public void addItem(OrderItem item) { updateDate(); items.add(item); }
-    public void removeItem(Long itemId) { updateDate(); items.removeIf(item -> item.getId().equals(itemId)); }
-
-}
+//package com.app.f1x.model;
+//
+//import com.app.f1x.util.enums.OrderStatus;
+//import jakarta.persistence.CascadeType;
+//import jakarta.persistence.Entity;
+//import jakarta.persistence.EnumType;
+//import jakarta.persistence.Enumerated;
+//import jakarta.persistence.FetchType;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
+//import jakarta.persistence.OneToMany;
+//import jakarta.persistence.Table;
+//import lombok.EqualsAndHashCode;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//
+//import java.time.LocalDateTime;
+//import java.util.List;
+//
+//@Entity
+//@Table(name = "orders")
+//@Getter
+//@NoArgsConstructor
+//@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+//public class Order {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @EqualsAndHashCode.Include
+//    private Long id;
+//
+//    @Setter
+//    private LocalDateTime creationTime;
+//
+//    @Setter
+//    private LocalDateTime completionTime;
+//
+//    @Setter
+//    private String customerName;
+//
+//    @Setter
+//    private String customerContact;
+//
+//    @Setter
+//    @Enumerated(EnumType.STRING)
+//    private OrderStatus status;
+//
+//    @Setter
+//    private String note;
+//
+//    @Setter
+//    private Float grandTotal;
+//
+//    @Setter
+//    @OneToMany(mappedBy = "order_items", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<OrderItem> orderItems;
+//
+//}

@@ -1,4 +1,4 @@
-package com.app.f1x.model.enums;
+package com.app.f1x.util.enums;
 
 public enum OrderStatus {
     PENDING,
