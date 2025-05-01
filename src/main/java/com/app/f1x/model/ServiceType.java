@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "service_types")
+@Table(name = "service_type")
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -27,6 +28,29 @@ public class ServiceType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "laundromat_id")
+    @Setter
+    private Laundromat laundromat;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "required_service_product",
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    @Setter
+    private List<Product> required_products;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "optional_service_product",
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    @Setter
+    private List<Product> optional_products;
 
     @Setter
     private String name;

@@ -1,6 +1,5 @@
 package com.app.f1x.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,14 +18,15 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "position")
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Order {
+public class Position {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,17 +34,13 @@ public class Order {
     @Setter
     private Laundromat laundromat;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
+    private List<User> users;
+
+    @Column(name = "name", unique = true, nullable = false)
     @Setter
-    private List<OrderItem> orderItems;
+    private String name;
 
-    @Column(name = "customer_name", nullable = false)
-    private String customerName;
-
-    @Column(name = "customer_contact")
-    private String customerContact;
-
-    @Column(name = "grand_total", precision = 10, scale = 2)
-    private Float grandTotal;
+    // add feature access permissions here
 
 }
