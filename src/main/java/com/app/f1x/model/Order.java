@@ -1,8 +1,11 @@
 package com.app.f1x.model;
 
+import com.app.f1x.util.enums.OrderStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,6 +40,10 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter
     private List<OrderItem> orderItems;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private OrderStatus status;
 
     @Column(name = "customer_name", nullable = false)
     private String customerName;
