@@ -1,8 +1,11 @@
 package com.app.f1x.model;
 
+import com.app.f1x.util.enums.UserRole;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,13 +18,19 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "user")
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,22 +49,60 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "position_id")
     @Setter
-    private Position position;
+    private LaundromatRole laundromatRole;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role")
+    @Setter
+    private UserRole userRole;
+
+    @Column(name = "email", nullable = false)
+    @Setter
+    private String email;
 
     @Column(name = "username", unique = true, nullable = false)
     @Setter
     private String username;
 
-    @Column(name = "display_name", nullable = false)
+    @Column(name = "first_name", nullable = false)
     @Setter
-    private String displayName;
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    @Setter
+    private String lastName;
 
     @Column(name = "password", nullable = false)
     @Setter
     private String password;
 
-    @Column(name = "contact")
+    @Column(name = "locked", nullable = false)
     @Setter
-    private String contact;
+    private Boolean locked;
+
+    @Column(name = "enabled", nullable = false)
+    @Setter
+    private Boolean enabled;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.toString());
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.locked;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
 
 }
