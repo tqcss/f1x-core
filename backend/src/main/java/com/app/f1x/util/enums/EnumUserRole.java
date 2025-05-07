@@ -1,6 +1,7 @@
 package com.app.f1x.util.enums;
 
-public enum UserRole {
+public enum EnumUserRole {
     USER,
+    ROLE,
     ADMIN
 }

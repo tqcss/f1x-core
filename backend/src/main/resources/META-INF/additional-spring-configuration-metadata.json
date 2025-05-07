@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "com.f1x.jwt-secret",
+      "type": "java.lang.String",
+      "description": "Description for com.f1x.jwt-secret."
+    },
+    {
+      "name": "com.f1x.jwt-expiration-ms",
+      "type": "java.lang.Integer",
+      "description": "Description for com.f1x.jwt-expiration-ms."
+    }
+  ] }

@@ -6,7 +6,7 @@ import com.app.f1x.dto.user.UserResponse;
 import com.app.f1x.model.User;
 import com.app.f1x.repository.UserRepository;
 import com.app.f1x.service.UserService;
-import com.app.f1x.util.enums.UserRole;
+import com.app.f1x.util.enums.EnumUserRole;
 import com.app.f1x.util.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +53,7 @@ public class UserServiceImpl implements UserService {
     public Optional<UserResponse> createUser(CreateUserRequest createUserRequest) {
         User user = userMapper.toUser(createUserRequest);
         user.setCreatedAt(LocalDateTime.now());
-        user.setUserRole(UserRole.USER);
+        user.setUserRole(EnumUserRole.USER);
         user.setLocked(false);
         user.setEnabled(true);
 

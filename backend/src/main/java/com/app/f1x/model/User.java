@@ -1,6 +1,6 @@
 package com.app.f1x.model;
 
-import com.app.f1x.util.enums.UserRole;
+import com.app.f1x.util.enums.EnumUserRole;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +29,6 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-//public class User implements UserDetails {
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +56,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     @Setter
-    private UserRole userRole;
+    private EnumUserRole userRole;
 
     @Column(name = "email", nullable = false)
     @Setter
