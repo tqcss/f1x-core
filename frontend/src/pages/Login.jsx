@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Home() {
+function Login() {
     // const [data, setData] = useState([]);
     // const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
@@ -54,4 +54,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Login;
