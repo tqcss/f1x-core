@@ -15,14 +15,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "position")
+@Table(name = "laundromat_role")
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Position {
+public class LaundromatRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +35,13 @@ public class Position {
     @Setter
     private Laundromat laundromat;
 
-    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "laundromatRole", fetch = FetchType.LAZY)
+    @Setter
     private List<User> users;
+
+    @Column(name = "created_at", nullable = false)
+    @Setter
+    private LocalDateTime createdAt;
 
     @Column(name = "name", unique = true, nullable = false)
     @Setter

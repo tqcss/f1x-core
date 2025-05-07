@@ -21,6 +21,7 @@ public class UserMapper {
     public UserResponse toResponse(User user) {
         return UserResponse.builder()
                 .id(user.getId())
+                .createdAt(user.getCreatedAt())
                 .userRole(user.getUserRole().toString())
                 .email(user.getEmail())
                 .username(user.getUsername())

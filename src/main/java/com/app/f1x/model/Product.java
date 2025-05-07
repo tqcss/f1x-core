@@ -9,13 +9,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -35,34 +35,34 @@ public class Product {
     @Setter
     private Laundromat laundromat;
 
-    @OneToMany(mappedBy = "position")
-    @Setter
-    private List<User> users;
-
     // marked as a required product used in a service
-    @ManyToMany(mappedBy = "required_products", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "requiredProducts", fetch = FetchType.LAZY)
     @Setter
     private List<ServiceType> requiredInServices;
 
     // marked as an optional product used in a service
-    @ManyToMany(mappedBy = "optional_product", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "optionalProducts", fetch = FetchType.LAZY)
     @Setter
     private List<ServiceType> optionalInServices;
 
     // marked as an optional product placed in an OrderItem
-    @ManyToMany(mappedBy = "optional_product", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "optionalProducts", fetch = FetchType.LAZY)
     @Setter
     private List<OrderItem> optionalInOrderItem;
+
+    @Column(name = "created_at", nullable = false)
+    @Setter
+    private LocalDateTime createdAt;
 
     @Column(name = "name", nullable = false)
     @Setter
     private String name;
 
-    @Column(name = "inventory_cost", precision = 10, scale = 2, nullable = false)
+    @Column(name = "inventory_cost", nullable = false)
     @Setter
     private Float inventoryCost;
 
-    @Column(name = "usage_cost", precision = 10, scale = 2, nullable = false)
+    @Column(name = "usage_cost", nullable = false)
     @Setter
     private Float usageCost;
 

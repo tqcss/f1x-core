@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -45,7 +46,7 @@ public class Laundromat {
 
     @OneToMany(mappedBy = "laundromat", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter
-    private List<Position> positions;
+    private List<LaundromatRole> laundromatRoles;
 
     @OneToMany(mappedBy = "laundromat", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter
@@ -54,6 +55,10 @@ public class Laundromat {
     @OneToMany(mappedBy = "laundromat", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Setter
     private List<Product> products;
+
+    @Column(name = "created_at", nullable = false)
+    @Setter
+    private LocalDateTime createdAt;
 
     @Column(name = "name", nullable = false)
     @Setter

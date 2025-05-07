@@ -14,11 +14,12 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Table(name = "orderItem")
+@Table(name = "order_item")
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -30,6 +31,7 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @Setter
     private Order order;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -38,18 +40,23 @@ public class OrderItem {
             joinColumns = @JoinColumn(name = "order_item_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
+    @Setter
     private List<Product> optionalProducts;
 
-    @Column(name = "serviceName", nullable = false)
+    @Column(name = "service_name", nullable = false)
+    @Setter
     private String serviceName;
 
-    @Column(name = "serviceCost", precision = 10, scale = 2, nullable = false)
+    @Column(name = "service_cost", nullable = false)
+    @Setter
     private Float serviceCost;
 
-    @Column(name = "quantity", precision = 8, nullable = false)
+    @Column(name = "quantity", nullable = false)
+    @Setter
     private Integer quantity;
 
-    @Column(name = "subtotal", precision = 10, scale = 2, nullable = false)
+    @Column(name = "subtotal", nullable = false)
+    @Setter
     private Float subtotal;
 
 }

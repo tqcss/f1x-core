@@ -33,7 +33,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductResponse createProduct(@Valid @RequestBody CreateProductRequest createProductRequest) {
+    public Optional<ProductResponse> createProduct(@Valid @RequestBody CreateProductRequest createProductRequest) {
         return productService.createProduct(createProductRequest);
     }
 

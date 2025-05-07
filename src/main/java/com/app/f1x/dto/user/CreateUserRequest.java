@@ -18,8 +18,4 @@ public class CreateUserRequest extends UpdateUserRequest {
     @NotNull
     private String email;
 
-    @Length(min = 8, max = 31)
-    @NotNull
-    private String password;
-
 }

@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -41,17 +42,25 @@ public class Order {
     @Setter
     private List<OrderItem> orderItems;
 
+    @Column(name = "created_at", nullable = false)
+    @Setter
+    private LocalDateTime createdAt;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
+    @Setter
     private OrderStatus status;
 
     @Column(name = "customer_name", nullable = false)
+    @Setter
     private String customerName;
 
     @Column(name = "customer_contact")
+    @Setter
     private String customerContact;
 
-    @Column(name = "grand_total", precision = 10, scale = 2)
+    @Column(name = "grand_total")
+    @Setter
     private Float grandTotal;
 
 }

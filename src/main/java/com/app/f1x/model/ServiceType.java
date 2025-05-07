@@ -1,5 +1,6 @@
 package com.app.f1x.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -41,7 +43,7 @@ public class ServiceType {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     @Setter
-    private List<Product> required_products;
+    private List<Product> requiredProducts;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -50,33 +52,22 @@ public class ServiceType {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     @Setter
-    private List<Product> optional_products;
+    private List<Product> optionalProducts;
 
+    @Column(name = "created_at", nullable = false)
+    @Setter
+    private LocalDateTime createdAt;
+
+    @Column(name = "name", nullable = false)
     @Setter
     private String name;
 
+    @Column(name = "description", nullable = false)
     @Setter
     private String description;
 
+    @Column(name = "service_cost", nullable = false)
     @Setter
     private Float serviceCost;
-
-    @Setter
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "service_product_required",
-            joinColumns = @JoinColumn(name = "service_type_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> requiredProducts;
-
-    @Setter
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "service_product_optional",
-            joinColumns = @JoinColumn(name = "service_type_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> optionalProducts;
 
 }

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,36 +32,35 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponse> getAllProducts() {
-        return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();
+        return productRepository.findAll().stream().map(productMapper::toResponse).toList();
     }
 
     @Override
     public Optional<ProductResponse> getProductById(Integer id) {
-        return productRepository.findById(id).map(productMapper::toProductResponse);
+        return productRepository.findById(id).map(productMapper::toResponse);
     }
 
     @Override
-    public ProductResponse createProduct(CreateProductRequest createProductRequest) {
+    @Transactional
+    public Optional<ProductResponse> createProduct(CreateProductRequest createProductRequest) {
         Product product = productMapper.toProduct(createProductRequest);
         productRepository.save(product);
-        return productMapper.toProductResponse(product);
+        return Optional.ofNullable(productMapper.toResponse(product));
     }
 
     @Override
+    @Transactional
     public Optional<ProductResponse> updateProduct(Integer id, UpdateProductRequest updateProductRequest) {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isEmpty()) { return Optional.empty(); }
 
-        Product product = optionalProduct.get();
-        product.setName(updateProductRequest.getName());
-        product.setInventoryCost(updateProductRequest.getInventoryCost());
-        product.setUsageCost(updateProductRequest.getUsageCost());
+        Product product = productMapper.toProduct(optionalProduct.get(), updateProductRequest);
         productRepository.save(product);
-
-        return optionalProduct.map(productMapper::toProductResponse);
+        return optionalProduct.map(productMapper::toResponse);
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Integer id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isEmpty()) {
@@ -70,4 +70,5 @@ public class ProductServiceImpl implements ProductService {
         log.info("Deleting product with id {}", id);
         productRepository.deleteById(id);
     }
+
 }
