@@ -6,16 +6,13 @@ import com.app.f1x.dto.user.UserResponse;
 import com.app.f1x.model.User;
 import com.app.f1x.repository.UserRepository;
 import com.app.f1x.service.UserService;
-import com.app.f1x.util.enums.EnumUserRole;
 import com.app.f1x.util.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.core.userdetails.UserDetailsService;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,12 +30,6 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        return userRepository.findByUsername(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
-//    }
-
     @Override
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll().stream().map(userMapper::toResponse).toList();
@@ -53,7 +44,7 @@ public class UserServiceImpl implements UserService {
     public Optional<UserResponse> createUser(CreateUserRequest createUserRequest) {
         User user = userMapper.toUser(createUserRequest);
         user.setCreatedAt(LocalDateTime.now());
-        user.setUserRole(EnumUserRole.USER);
+        user.setUserRole(Collections.emptySet());
         user.setLocked(false);
         user.setEnabled(true);
 
@@ -91,6 +82,22 @@ public class UserServiceImpl implements UserService {
             return Optional.ofNullable(userMapper.toResponse(existingUser));
         }
         return Optional.empty();
+    }
+
+    // security methods
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Boolean existsByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return null;
     }
 
 }

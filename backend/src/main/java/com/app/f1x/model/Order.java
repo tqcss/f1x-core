@@ -1,6 +1,6 @@
 package com.app.f1x.model;
 
-import com.app.f1x.util.enums.OrderStatus;
+import com.app.f1x.util.enums.EnumOrderStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,7 +49,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     @Setter
-    private OrderStatus status;
+    private EnumOrderStatus status;
 
     @Column(name = "customer_name", nullable = false)
     @Setter

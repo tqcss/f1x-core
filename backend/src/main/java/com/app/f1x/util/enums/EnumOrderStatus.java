@@ -1,6 +1,6 @@
 package com.app.f1x.util.enums;
 
-public enum OrderStatus {
+public enum EnumOrderStatus {
     PENDING,
     IN_PROGRESS,
     COMPLETED,

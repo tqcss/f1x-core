@@ -1,6 +1,5 @@
 package com.app.f1x.model;
 
-import com.app.f1x.util.enums.EnumUserRole;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,11 +17,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -56,7 +53,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role")
     @Setter
-    private EnumUserRole userRole;
+    private Set<UserRole> userRole;
 
     @Column(name = "email", nullable = false)
     @Setter
@@ -85,26 +82,5 @@ public class User {
     @Column(name = "enabled", nullable = false)
     @Setter
     private Boolean enabled;
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.toString());
-//        return Collections.singletonList(authority);
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return this.username;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return !this.locked;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return this.enabled;
-//    }
 
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "user_role")
@@ -24,7 +25,8 @@ public class UserRole {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = name)
-    private UserRole name
+    @Column(name = "name")
+    @Setter
+    private String name;
 
 }
