@@ -1,40 +1,41 @@
-import React from 'react';
-import './styles/orders.css'; // Ensure this path matches your project structure
-import logo from './logo.png';
-import homeButton from './assets/images/homeButton.png';
-import orderButton from './assets/images/orderButton.png';
-import inventoryButton from './assets/images/inventoryButton.png';
-import supplierButton from './assets/images/supplierButton.png';
-import employeesButton from './assets/images/employeesButton.png';
-import trackingButton from './assets/images/trackingButton.png';
-import financeButton from './assets/images/financeButton.png';
-import reportsButton from './assets/images/reportsButton.png';
-import accountButton from './assets/images/accountButton.png';
-import logoutButton from '.assets/images/logoutButton.png';
+// import React from 'react';
+import '../styles/orders.css'; // Ensure this path matches your project structure
+import logo from '../../public/assets/logo.png';
+import homeButton from '../../public/assets/images/homeButton.png';
+import orderButton from '../../public/assets/images/orderButton.png';
+import inventoryButton from '../../public/assets/images/inventoryButton.png';
+import supplierButton from '../../public/assets/images/supplierButton.png';
+import employeesButton from '../../public/assets/images/employeesButton.png';
+import trackingButton from '../../public/assets/images/trackingButton.png';
+import financeButton from '../../public/assets/images/financeButton.png';
+import reportsButton from '../../public/assets/images/reportsButton.png';
+import accountButton from '../../public/assets/images/accountButton.png';
+import logoutButton from '../../public/assets/images/logoutButton.png';
+import React, { useState, useEffect } from 'react';
 
-const Order = () => {
+function Order() {
   return (
     <div>
       <header>
         <img
           className="Logo"
-          onClick={() => window.location.href = 'home.html'}
+          // onClick={() => window.location.href = 'home.html'}
           src={logo}
           alt=""
         />
         <nav>
           <ul className="sidebar">
-            <li><a href="home.html"><img src={homeButton} alt="Home" /></a></li>
-            <li><a href="orders.html"><img src={orderButton} alt="Order" /></a></li>
-            <li><a href="inventory.html"><img src={inventoryButton} alt="Inventory" /></a></li>
-            <li><a href="supplier.html"><img src={supplierButton} alt="Supplier" /></a></li>
-            <li><a href="employee.html"><img src={employeesButton} alt="Employee" /></a></li>
-            <li><a href="tracking.html"><img src={trackingButton} alt="Tracking" /></a></li>
-            <li><a href="finance.html"><img src={financeButton} alt="Finance" /></a></li>
-            <li><a href="reports.html"><img src={reportsButton} alt="Reports" /></a></li>
+            <li><a href=""><img src={homeButton} alt="Home" /></a></li>
+            <li><a href=""><img src={orderButton} alt="Order" /></a></li>
+            <li><a href=""><img src={inventoryButton} alt="Inventory" /></a></li>
+            <li><a href=""><img src={supplierButton} alt="Supplier" /></a></li>
+            <li><a href=""><img src={employeesButton} alt="Employee" /></a></li>
+            <li><a href=""><img src={trackingButton} alt="Tracking" /></a></li>
+            <li><a href=""><img src={financeButton} alt="Finance" /></a></li>
+            <li><a href=""><img src={reportsButton} alt="Reports" /></a></li>
             
-            <li className="spaced-top"><a href="login.html"><img src={accountButton} alt="Account" /></a></li>
-            <li><a href="logout.html"><img src={logoutButton} alt="Logout" /></a></li>
+            <li className="spaced-top"><a href=""><img src={accountButton} alt="Account" /></a></li>
+            <li><a href=""><img src={logoutButton} alt="Logout" /></a></li>
           </ul>
         </nav>
       </header>
@@ -45,8 +46,8 @@ const Order = () => {
         </div>
       </div>
 
-      <button className="add-order" onClick={() => window.location.href = 'orders.html'}>+Add Order</button>
-      <button className="order-table" onClick={() => window.location.href = 'orders1.html'}>Order Table</button>
+      <button className="add-order" onClick={() => window.location.href = ''}>+Add Order</button>
+      <button className="order-table" onClick={() => window.location.href = ''}>Order Table</button>
 
       {/* Form for Orders */}
       <div className="order-container">
