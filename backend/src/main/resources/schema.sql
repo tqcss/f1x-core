@@ -61,6 +61,11 @@ CREATE TABLE IF NOT EXISTS "user" (
     FOREIGN KEY (laundromat_role_id) REFERENCES laundromat_role(id)
 );
 
+CREATE TABLE IF NOT EXISTS "user_role" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(63) NOT NULL
+)
+
 CREATE TABLE IF NOT EXISTS "service_type" (
     id SERIAL PRIMARY KEY,
     laundromat_id INTEGER NOT NULL,
