@@ -1,4 +1,4 @@
-package com.app.f1x.controller;
+package com.app.f1x.restController;
 
 import com.app.f1x.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;

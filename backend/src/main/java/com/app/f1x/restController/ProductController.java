@@ -1,4 +1,4 @@
-package com.app.f1x.controller;
+package com.app.f1x.restController;
 
 import com.app.f1x.dto.product.CreateProductRequest;
 import com.app.f1x.dto.product.ProductResponse;
