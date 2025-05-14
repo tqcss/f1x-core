@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    font-family: 'Bungee', sans-serif;
+    background: url('../assets/background-image-2.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/*p {*/
+/*    color: #ff4747;*/
+/*    font-family: Arial;*/
+/*    text-transform: lowercase;*/
+/*    font-size: 0.8rem;*/
+/*    transform: translateY(-5px);*/
+/*}*/
+
+.main-content {
+    margin-left: 45px;
+    width: calc(100% - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.register-title-header {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.register-title-header h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Register form wrapper */
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Register box */
+.register-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+    margin-top: 110px;
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 24px;
+    color: white;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 10px 0;
+    padding: 0 10px;
+    background-color: white;
+}
+
+.input-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #555;
+    width: 20px;
+    text-align: center;
+}
+
+.input-group input {
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
+}
+
+.register-container button {
+    width: 50%;
+    padding: 12px;
+    background-color: #0707a5;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.register-container button:hover {
+    background-color: #45a049;
+}
+
+.register-container a {
+    display: block;
+    margin-top: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.register-container a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        width: 70px;
+        padding-top: 10px;
+    }
+
+    .Logo {
+        width: 40px;
+        margin-bottom: 20px;
+    }
+
+    .sidebar li a img {
+        width: 30px;
+    }
+
+    .login-title-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .login-container {
+        width: 90%;
+    }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> </head>
+<body>
+<div class="container mt-4">
+    <h1>Create Order</h1>
+    <form action="/orders" method="post" th:object="${orderRequest}" class="needs-validation" novalidate>
+
+        <div class="card mb-3">
+            <div class="card-header">Customer Information</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="customerName" class="form-label">Customer Name:</label>
+                    <input type="text" id="customerName" th:field="*{customerName}" class="form-control" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('customerName')}">
+                        <span th:errors="*{customerName}"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="customerContact" class="form-label">Customer Contact:</label>
+                    <input type="text" id="customerContact" th:field="*{customerContact}" class="form-control" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('customerContact')}">
+                        <span th:errors="*{customerContact}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">Order Items</div>
+            <div class="card-body">
+                <div id="orderItemsContainer">
+                    <div class="order-item-group mb-3" data-index="0">
+                        <label class="form-label">Service Name:</label>
+                        <select name="orderItems[0].serviceName" class="form-select serviceName" required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option th:each="service : ${serviceTypes}" th:value="${service.name}" th:text="${service.name}"></option>
+                        </select>
+                        <label class="form-label">Quantity:</label>
+                        <input type="number" name="orderItems[0].quantity" class="form-control quantity" value="1" required min="0">
+                        <button type="button" class="btn btn-danger remove-item mt-2">Remove</button>
+                    </div>
+                </div>
+                <button type="button" id="addOrderItem" class="btn btn-primary">Add Order Item</button>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Create Order</button>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function() { // Use jQuery's document ready
+        const addOrderItemButton = $('#addOrderItem'); // Use jQuery selector
+        const orderItemsContainer = $('#orderItemsContainer');
+        let orderItemIndex = 1;
+
+        addOrderItemButton.on('click', function() { // Use jQuery event binding
+            const newItem = $('<div class="order-item-group mb-3" data-index="' + orderItemIndex + '">'); // Use jQuery to create elements
+            newItem.html(`
+                    <label class="form-label">Service Name:</label>
+                    <select name="orderItems[${orderItemIndex}].serviceName" class="form-select serviceName" required>
+                        <option value="" disabled selected>Select Service</option>
+                        <option th:each="service : ${serviceTypes}" th:value="${service.name}" th:text="${service.name}"></option>
+                    </select>
+                    <label class="form-label">Quantity:</label>
+                    <input type="number" name="orderItems[${orderItemIndex}].quantity" class="form-control quantity" value="1" required min="0">
+                    <button type="button" class="btn btn-danger remove-item mt-2">Remove</button>
+                `);
+
+            orderItemsContainer.append(newItem); // Use jQuery to append
+            orderItemIndex++;
+
+            const removeButtons = $('.remove-item'); // Use jQuery selector
+            removeButtons.on('click', function(event) {  // Use jQuery event binding
+                $(this).closest('.order-item-group').remove(); // Use jQuery traversal
+            });
+        });
+
+        $(document).on('click', '.remove-item', function(event) {
+            $(this).closest('.order-item-group').remove();
+        });
+
+        // Form validation
+        const form = $('.needs-validation')[0]; // Get the raw DOM element
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
