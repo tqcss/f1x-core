@@ -19,8 +19,7 @@
         <div class="register-container">
             <h2>REGISTER</h2>
             <div th:if="${success}" class="alert" role="alert">
-                <strong>Account Created Successfully</strong>
-                <a class="login-label" href="/login">Login</a>
+                <strong class="strong">Account Created Successfully</strong>
             </div>
             <form action="#" method="post" th:object="${userRegisterRequest}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
@@ -61,7 +60,7 @@
                 <p th:if="${#fields.hasErrors('confirmPassword')}" th:errorclass="text-danger" th:errors="${userRegisterRequest.confirmPassword}"></p>
                 <button type="submit">REGISTER</button>
             </form>
-            <a href="/">Already have an account? Login here</a>
+            <a href="/login">Already have an account? Login here</a>
         </div>
     </div>
 </div>

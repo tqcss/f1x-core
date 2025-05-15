@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F1+X: Laundry System</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" th:href="@{/styles/orders.css}"/>
+</head>
+
+<body>
+    <!--Navbar-->
+    <header>
+        <ul class="sidebar">
+            <img class="Logo" onclick="window.location.href='/app/home';" th:src="@{/assets/logo.png}" alt="Logo">
+        <nav>
+            <ul class="sidebar">
+                <li><a href="/app/home"><img th:src="@{/assets/homeButton.png}" alt="Home" /></a></li>
+                <li><a href="/app/order"><img th:src="@{/assets/orderButton.png}" alt="Order" /></a></li>
+                <li><a href="/app/inventory"><img th:src="@{/assets/inventoryButton.png}" alt="Inventory" /></a></li>
+                <li><a href="/app/employee"><img th:src="@{/assets/employeesButton.png}" alt="Employee" /></a></li>
+
+                <li class="spaced-top"><a href="/login"><img th:src="@{/assets/accountButton.png}" alt="Account"></a></li>
+                <li><a href="/app/logout"><img th:src="@{/assets/logoutButton.png}" alt="Logout"></a></li>
+        </ul>
+       </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="title-header">
+            <h1>ORDERS</h1>
+        </div>
+    </div>
+
+    <button class="add-order" onclick="window.location.href='/order';">+Add Order</button>
+    <button class="order-table" onclick="window.location.href='/table';">Order Table</button>
+    <div class="order-container">
+  <div class="order-left">
+
+      <!-- Existing Customers -->
+      <div class="order-section">
+        <h2>For Existing Customers</h2>
+
+        <div class="input-group">
+          <label>Customer Name</label>
+          <input type="text" placeholder="Enter name" />
+        </div>
+
+        <div class="input-group2">
+          <label>Service:</label>
+          <label><input type="radio" name="existing-service" value="pickup" /> Pick-up</label>
+          <label><input type="radio" name="existing-service" value="delivery" /> Delivery</label>
+        </div>
+
+        <div class="input-group3">
+          <label>Quantity</label>
+          <input type="number" id="existing-quantity" placeholder="kg" />
+        </div>
+
+        <div class="input-group4">
+          <label for="priceUnit">Price Unit</label>
+          <select id="existing-priceUnit">
+            <option value="₱00.00">₱00.00</option>
+            <option value="₱10.00">₱10.00</option>
+            <option value="₱20.00">₱20.00</option>
+            <option value="₱50.00">₱50.00</option>
+            <option value="₱100.00">₱100.00</option>
+          </select>
+        </div>
+        
+        <div class="input-group5">
+          <label>Total</label>
+          <input type="text" value="₱00.00" readonly />
+        </div>
+      </div>
+
+      <!-- Non-Existing Customers -->
+      <div class="order-section2">
+        <h2>For Non-Existing Customers</h2>
+
+        <div class="input-group">
+          <label>Customer Name</label>
+          <input type="text" placeholder="Enter name" />
+          <label>Contact Number</label>
+          <input type="text" placeholder="09XXXXXXXXX" />
+        </div>
+
+        <div class="input-group2">
+          <label>Service</label>
+          <label><input type="radio" name="new-service" value="pickup" /> Pick-up</label>
+          <label><input type="radio" name="new-service" value="delivery" /> Delivery</label>
+        </div>
+
+        <div class="input-group3">
+          <label>Quantity</label>
+          <input type="number" id="new-quantity" placeholder="kg" />
+        </div>
+
+        <div class="input-group4">
+          <label for="priceUnit">Price Unit</label>
+          <select id="new-priceUnit">
+            <option value="₱00.00">₱00.00</option>
+            <option value="₱10.00">₱10.00</option>
+            <option value="₱20.00">₱20.00</option>
+            <option value="₱50.00">₱50.00</option>
+            <option value="₱100.00">₱100.00</option>
+          </select>
+          
+        </div>
+
+        <div class="input-group5">
+          <label>Total</label>
+          <input type="text" value="₱00.00" readonly />
+
+          <!--Back-end needed: when clicked this should send data to the db
+          and fetch data from db to show in the complete details section-->
+          <button class="generate-receipt">Generate Receipt</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-right">
+      <h3>Complete Details</h3>
+      <div class="customer-details">
+        <h4>Customer Details</h4>
+      </div>
+      <div class="input-group6">
+        <label>Name</label>
+        <input type="text" readonly />
+      </div>
+      <div class="input-id">
+        <label>ORDER NO:</label>
+        <input type="text" readonly />
+      </div>
+      <div class="input-group6">
+        <label>Contact Number</label>
+        <input type="text" readonly />
+      </div>
+      <div class="input-group7">
+        <label>Address</label>
+        <input type="text" readonly />
+      </div>
+      <div class="order-details">
+        <h5>Order Details</h5>
+      </div>
+      <div class="input-group8">
+        <label>Service</label>
+        <input type="text" readonly />
+      </div>
+      <div class="input-group8">
+        <label>Quantity (Kg)</label>
+        <input type="text" readonly />
+      </div>
+      <div class="input-group9">
+        <label>Total:</label>
+        <input type="text" value="₱000.00" readonly />
+      </div>
+    </div>
+
+    <script th:src="@{/js/orders}"></script>
+
+</body>
+</html>
