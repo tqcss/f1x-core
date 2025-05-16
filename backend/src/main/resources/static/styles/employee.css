@@ -80,10 +80,14 @@ nav {
 }
 
 .main-content {
-  margin-left: 80px;
-  width: calc(100% - 80px);
-  padding: 2rem;
-  overflow-y: auto;
+    margin-left: 80px; /* Matches the sidebar width */
+    width: calc(100% - 80px); /* Fills remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
+    padding-top: 100px; /* Push it down a bit from top */
+    min-height: 100vh; /* Allow scrolling if needed */
+    box-sizing: border-box;
 }
 
 .employee-panel {

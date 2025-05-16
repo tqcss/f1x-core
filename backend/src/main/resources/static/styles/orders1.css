@@ -10,7 +10,7 @@ body {
     display: flex;
     height: 100vh;
     font-family: 'Bungee', sans-serif;
-    background: url('images/bg.png') no-repeat center center fixed;
+    background: url('./../assets/bg.png') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -134,7 +134,7 @@ nav {
     color: #fff;
     border-radius: 10px;
     margin-top: 90px;
-    margin-left: -50px;
+    margin-left: -45px;
     padding: 16px 60px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -142,7 +142,7 @@ nav {
 
 
 /* Main container */
-.order-data {
+.orders-data {
     position: absolute;
     top: 10px;
     left: 15%;
@@ -153,3 +153,41 @@ nav {
     margin-top: 130px;
     margin-left: -100px;
 }
+
+.orders-data h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.orders-data table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.orders-data th,
+.orders-data td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+}
+
+.orders-data thead {
+    background-color: #555;
+    color: white;
+}
+
+.orders-data tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.orders-data tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
