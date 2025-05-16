@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1+X: Employee UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/styles/employee.css}" />
+</head>
+
+<body>
+  <header>
+    <img class="Logo" onclick="window.location.href='/app/home';" th:src="@{/assets/logo.png}" alt="Logo" />
+    <nav>
+      <ul class="sidebar">
+            <li><a href="/app/home"><img th:src="@{/assets/homeButton.png}" alt="Home"></a></li>
+            <li><a href="/app/order"><img th:src="@{/assets/orderButton.png}" alt="Order"></a></li>
+            <li><a href="/app/inventory"><img th:src="@{/assets/inventoryButton.png}" alt="Inventory"></a></li>
+            <li><a href="/app/employee"><img th:src="@{/assets/employeesButton.png}" alt="Employee"></a></li>
+        
+            <!-- Add class for spacing -->
+            <li class="spaced-top"><a href="/login"><img th:src="@{/assets/accountButton.png}" alt="Account"></a></li>
+            <li><a href="/app/logout"><img th:src="@{/assets/logoutButton.png}" alt="Logout"></a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="employee-panel">
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="Search..." oninput="filterEmployees()">
+        <select id="filterBy" onchange="filterEmployees()">
+          <option value="name">Name</option>
+          <option value="role">Role</option>
+          <option value="access">Access</option>
+        </select>
+        <button onclick="addEmployee()"><i class="fas fa-user-plus"></i></button>
+        <button onclick="removeLastEmployee()"><i class="fas fa-user-minus"></i></button>
+      </div>
+      <div class="employee-grid" id="employeeGrid"></div>
+    </section>
+  </main>
+
+  <script>
+    const employees = [
+      {
+        name: "Juan Dela Cruz",
+        role: "Manager",
+        status: "Ongoing",
+        image: "/styles/yuki.jpg"
+      },
+      {
+        name: "Maria Santos",
+        role: "Staff",
+        status: "Out",
+        image: "yuki.jpg"
+      },
+      {
+        name: "Ana Lopez",
+        role: "Cashier",
+        status: "Ongoing",
+        image: "yuki.jpg"
+      },
+      {
+        name: "Pedro Reyes",
+        role: "Laundry",
+        access: "Limited",
+        status: "Ongoing",
+        image: "yuki.jpg"
+      },
+      {
+        name: "Carlos Tan",
+        role: "Inventory",
+        access: "Standard",
+        status: "Out",
+        image: "yuki.jpg"
+      }
+    ];
+
+    function renderEmployees(data) {
+      const grid = document.getElementById("employeeGrid");
+      grid.innerHTML = "";
+      data.forEach((emp, index) => {
+        grid.innerHTML += `
+          <div class="employee-card" id="employee-${index}">
+            <label for="imgUpload-${index}">
+              <img src="images/employeeProfile/${emp.image}" alt="${emp.name}" id="img-${index}" class="clickable-img">
+            </label>
+            <input type="file" id="imgUpload-${index}" class="file-input" accept="image/*" style="display:none" onchange="editImage(event, ${index})">
+            
+            <p><strong>NAME:</strong> <span contenteditable="true" id="name-${index}">${emp.name}</span></p>
+            <p><strong>ROLE:</strong> <span contenteditable="true" id="role-${index}">${emp.role}</span></p>
+            <p><strong>ACCESS:</strong> <span contenteditable="true" id="access-${index}">${emp.access}</span></p>
+            <p class="status">STATUS: <span class="${emp.status === 'Ongoing' ? 'ongoing' : 'out'}">${emp.status}</span></p>
+            <button onclick="enableEdit(${index})">EDIT</button>
+            <button onclick="toggleStatus(${index})">Switch Status</button>
+          </div>
+        `;
+      });
+    }
+
+    function enableEdit(index) {
+      document.getElementById(`name-${index}`).focus();
+    }
+
+    function editImage(event, index) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById(`img-${index}`).src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function toggleStatus(index) {
+      const employee = employees[index];
+      const statusSpan = document.getElementById(`employee-${index}`).querySelector('.status span');
+      if (employee.status === "Ongoing") {
+        employee.status = "Out";
+        statusSpan.classList.remove('ongoing');
+        statusSpan.classList.add('out');
+        statusSpan.textContent = "Out";
+      } else {
+        employee.status = "Ongoing";
+        statusSpan.classList.remove('out');
+        statusSpan.classList.add('ongoing');
+        statusSpan.textContent = "Ongoing";
+      }
+    }
+
+    function filterEmployees() {
+      const search = document.getElementById("search").value.toLowerCase();
+      const filterBy = document.getElementById("filterBy").value;
+      const filtered = employees.filter(emp => emp[filterBy].toLowerCase().includes(search));
+      renderEmployees(filtered);
+    }
+
+    function addEmployee() {
+      employees.push({
+        name: "New Employee",
+        role: "New Role",
+        access: "Access",
+        status: "Ongoing",
+        image: "placeholder.jpg"
+      });
+      renderEmployees(employees);
+    }
+
+    function removeLastEmployee() {
+      employees.pop();
+      renderEmployees(employees);
+    }
+
+    window.onload = () => renderEmployees(employees);
+  </script>
+
+  <style>
+    .clickable-img {
+      cursor: pointer;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      margin-bottom: 8px;
+    }
+  </style>
+</body>
+
+</html>
