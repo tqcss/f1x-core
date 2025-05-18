@@ -1,55 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - F1+X Laundry System</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" th:href="@{/styles/login.css}" />
+    <title></title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}">
+    <link rel="stylesheet" th:href="@{/styles/entry.css}">
+    <script th:if="${param.logout}" th:src="@{/scripts/entryAnimation.js}"></script>
 </head>
-
 <body>
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <div class="login-title-header">
-            <h1>F1+X</h1>
+    <div class="background-image"></div>
+    <main>
+        <h1 class="logo">F1+X</h1>
+        <p>Sign in to continue</p>
+        <div th:if="${param.logout}" class="success-alert">
+            <button class="exit-alert-button" >×</button>
+            <h3 >You have been logged out</h3>
         </div>
-
-        <div class="login-wrapper">
-            <div class="login-container">
-                <h2>LOGIN</h2>
-
-                <form th:action="@{/login}" method="post">
-                    <!-- Username Input -->
-                    <div class="input-group">
-                        <i class="fas fa-user input-icon"></i>
-                        <input type="text" id="username" name="username" placeholder="Username" required />
-                    </div>
-
-                    <!-- Password Input -->
-                    <div class="input-group">
-                        <i class="fas fa-lock input-icon"></i>
-                        <input type="password" id="password" name="password" placeholder="Password" required />
-                    </div>
-
-                    <!-- Error Message -->
-                    <div th:if="${param.error}" class="error-message">
-                        Invalid username or password.
-                    </div>
-
-                    <!-- Logout Message -->
-                    <div th:if="${param.logout}" class="logout-message">
-                        You have been logged out successfully.
-                    </div>
-
-                    <button type="submit" class="btn-primary">LOGIN</button>
-                </form>
-
-                <a href="/register">Don't have an account? Register here</a>
+        <form method="post" style="width: 300px">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <label>Email
+                <input type="text" name="username" id="username">
+            </label>
+            <label>Password
+                <input type="password" name="password" id="password">
+            </label>
+            <div>
+                <button type="submit" class="submit-button" style="width: 100%">Sign In</button>
+                <p th:if="${param.error}" class="error-hint" style="width: 100%; text-align: center">Invalid credentials</p>
             </div>
-        </div>
-    </div>
+        </form>
+        <p class="sign-in-hint">Don't have an account yet? <a href="/register">Sign Up</a></p>
+    </main>
+    <span class="bubbles">
+        <img th:src="@{/assets/bubble1.png}" alt="" draggable="false" class="slide-top-alternate">
+        <img th:src="@{/assets/bubble2.png}" alt="" draggable="false" class="slide-top-alternate">
+        <img th:src="@{/assets/bubble3.png}" alt="" draggable="false">
+        <img th:src="@{/assets/bubble4.png}" alt="" draggable="false" class="slide-top-alternate">
+    </span>
 </body>
-
 </html>

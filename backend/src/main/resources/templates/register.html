@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
     <link rel="stylesheet" th:href="@{/styles/global.css}">
-    <link rel="stylesheet" th:href="@{/styles/register.css}">
-    <script th:if="${success}" th:src="@{/scripts/register.js}"></script>
+    <link rel="stylesheet" th:href="@{/styles/entry.css}">
+    <script th:if="${success}" th:src="@{/scripts/entryAnimation.js}"></script>
 </head>
 <body>
     <div class="background-image"></div>
@@ -33,19 +34,19 @@
                     <p class="error-hint" th:if="${#fields.hasErrors('lastName')}" th:errors="${registerUserRequest.lastName}"></p>
                 </div>
             </div>
-            <div class="field-container">
+            <div>
                 <label>Email
                     <input type="text" th:field="${registerUserRequest.email}">
                 </label>
                 <p class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="${registerUserRequest.email}"></p>
             </div>
-            <div class="field-container">
+            <div>
                 <label>Password
                     <input type="password" th:field="${registerUserRequest.password}">
                 </label>
                 <p class="error-hint" th:if="${#fields.hasErrors('password')}" th:errors="${registerUserRequest.password}"></p>
             </div>
-            <div class="field-container">
+            <div>
                 <label>Confirm Password
                     <input type="password" th:field="${registerUserRequest.confirmPassword}">
                 </label>
@@ -55,5 +56,11 @@
         </form>
         <p class="sign-in-hint">Already have an account? <a href="/login">Sign in</a></p>
     </main>
+    <span class="bubbles">
+        <img th:src="@{/assets/bubble1.png}" alt="" draggable="false" class="slide-top-alternate">
+        <img th:src="@{/assets/bubble2.png}" alt="" draggable="false" class="slide-top-alternate">
+        <img th:src="@{/assets/bubble3.png}" alt="" draggable="false">
+        <img th:src="@{/assets/bubble4.png}" alt="" draggable="false" class="slide-top-alternate">
+    </span>
 </body>
 </html>
