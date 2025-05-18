@@ -1,0 +1,58 @@
+@font-face {
+    font-family: Poppins-bold;
+    src: url("../fonts/Poppins-Bold.ttf");
+}
+
+@font-face {
+    font-family: Poppins-medium;
+    src: url("../fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: Poppins-light;
+    src: url("../fonts/Poppins-Light.ttf");
+}
+
+@font-face {
+    font-family: Bungee-regular;
+    src: url("../fonts/Bungee-Regular.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #283277;
+}
+
+h1, h2, h3, p, label {
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.background-image {
+    position: fixed;
+    display: block;
+    height: 100svh;
+    width: 100%;
+    background-image: url("../assets/background-image.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-user-drag: none;
+    z-index: -1;
+}
+
+.logo {
+    color: #fff;
+    font-family: Bungee-regular, serif;
+}
+
+.error-hint {
+    color: #e34040;
+    font-family: Poppins-light, serif;
+}
