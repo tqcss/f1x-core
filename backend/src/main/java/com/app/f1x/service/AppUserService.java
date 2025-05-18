@@ -1,7 +1,66 @@
 package com.app.f1x.service;
 
-public interface AppUserService {
+import com.app.f1x.model.AppUser;
+import com.app.f1x.payload.request.RegisterUserRequest;
+import com.app.f1x.repository.AppUserRepository;
+import com.app.f1x.util.enums.UserRole;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 
+@Service
+public class AppUserService implements UserDetailsService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppUserService.class);
+
+    private final AppUserRepository appUserRepository;
+
+    @Autowired
+    public AppUserService(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<AppUser> optionalAppUser = appUserRepository.findAppUserByEmail(username);
+
+        return optionalAppUser.map(appUser -> User.withUsername(appUser.getEmail())
+                .password(appUser.getPassword())
+                .roles(appUser.getUserRole().toString())
+                .build()).orElse(null);
+    }
+
+    public Optional<AppUser> findAppUserByEmail(String email) {
+        return appUserRepository.findAppUserByEmail(email);
+    }
+
+    public Boolean createAppUser(RegisterUserRequest registerRequest) {
+        try {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            AppUser appUser = new AppUser();
+
+            appUser.setCreatedAt(LocalDateTime.now());
+            appUser.setUserRole(UserRole.CLIENT);
+            appUser.setFirstName(registerRequest.getFirstName());
+            appUser.setLastName(registerRequest.getLastName());
+            appUser.setEmail(registerRequest.getEmail());
+            appUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+
+            appUserRepository.save(appUser);
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
 
 }

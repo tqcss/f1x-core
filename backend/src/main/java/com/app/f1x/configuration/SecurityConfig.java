@@ -17,16 +17,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, OrderedFormContentFilter formContentFilter) throws Exception {
         return http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/").permitAll()
-                .requestMatchers("/styles/**", "/js/**", "/assets/**").permitAll()
+                .requestMatchers("/styles/**", "/scripts/**", "/assets/**", "/fonts/**").permitAll()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/logout").permitAll()
-                .requestMatchers("/app/home").permitAll()
                 .anyRequest().authenticated()
         ).formLogin(form -> form
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/app/home", true)
+//                .loginPage("/login")
+//                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/app/dashboard", true)
         ).logout(config -> config
                 .logoutSuccessUrl("/")
         ).build();
