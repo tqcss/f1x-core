@@ -27,7 +27,7 @@ body {
     background-color: #283277;
 }
 
-h1, h2, h3, p, label {
+h1, h2, h3, p, label, a {
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
