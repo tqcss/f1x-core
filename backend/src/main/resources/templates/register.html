@@ -1,69 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="EN">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-    <link rel="stylesheet" th:href="@{styles/register-style.css}" />
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}">
+    <link rel="stylesheet" th:href="@{/styles/register.css}">
+    <script th:if="${success}" th:src="@{/scripts/register.js}"></script>
 </head>
-
 <body>
-<!-- Main Content -->
-<div class="main-content">
-    <div class="register-title-header">
-        <h1>F1+X</h1>
-    </div>
-    <div class="register-wrapper">
-        <div class="register-container">
-            <h2>REGISTER</h2>
-            <div th:if="${success}" class="alert" role="alert">
-                <strong class="strong">Account Created Successfully</strong>
-            </div>
-            <form action="#" method="post" th:object="${userRegisterRequest}">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                <div class="input-group">
-                    <i class="fas fa-user input-icon"></i>
-                    <label>
-                        <input type="text" th:field="${userRegisterRequest.firstName}" placeholder="First Name" required />
-                    </label>
-                </div>
-                <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="text-danger" th:errors="${userRegisterRequest.firstName}"></p>
-                <div class="input-group">
-                    <i class="fas fa-user input-icon"></i>
-                    <label>
-                        <input type="text" th:field="${userRegisterRequest.lastName}" placeholder="Last Name" required />
-                    </label>
-                </div>
-                <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="text-danger" th:errors="${userRegisterRequest.lastName}"></p>
-                <div class="input-group">
-                    <i class="fas fa-envelope input-icon"></i>
-                    <label>
-                        <input type="email" th:field="${userRegisterRequest.email}" placeholder="Email Address" required />
-                    </label>
-                </div>
-                <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${userRegisterRequest.email}"></p>
-                <div class="input-group">
-                    <i class="fas fa-lock input-icon"></i>
-                    <label>
-                        <input type="password" th:field="${userRegisterRequest.password}" placeholder="Password" required />
-                    </label>
-                </div>
-                <p th:if="${#fields.hasErrors('password')}" th:errorclass="text-danger" th:errors="${userRegisterRequest.password}"></p>
-                <div class="input-group">
-                    <i class="fas fa-lock input-icon"></i>
-                    <label>
-                        <input type="password" th:field="${userRegisterRequest.confirmPassword}" placeholder="Confirm Password" required />
-                    </label>
-                </div>
-                <p th:if="${#fields.hasErrors('confirmPassword')}" th:errorclass="text-danger" th:errors="${userRegisterRequest.confirmPassword}"></p>
-                <button type="submit">REGISTER</button>
-            </form>
-            <a href="/login">Already have an account? Login here</a>
+    <div class="background-image"></div>
+    <main>
+        <h1 class="logo">F1+X</h1>
+        <p>Sign up to continue</p>
+        <div th:if="${success}" class="success-alert">
+            <button class="exit-alert-button" >×</button>
+            <h3 >Account Created Successfully</h3>
+            <p >Click <a href="/login">here</a> to go sign in page.</p>
         </div>
-    </div>
-</div>
-
+        <form method="post" th:object="${registerUserRequest}" th:action="@{/register}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="name-field-container">
+                <div>
+                    <label>First Name
+                        <input type="text" th:field="${registerUserRequest.firstName}">
+                    </label>
+                    <p class="error-hint" th:if="${#fields.hasErrors('firstName')}" th:errors="${registerUserRequest.firstName}"></p>
+                </div>
+                <div>
+                    <label>Last Name
+                        <input type="text" th:field="${registerUserRequest.lastName}">
+                    </label>
+                    <p class="error-hint" th:if="${#fields.hasErrors('lastName')}" th:errors="${registerUserRequest.lastName}"></p>
+                </div>
+            </div>
+            <div class="field-container">
+                <label>Email
+                    <input type="text" th:field="${registerUserRequest.email}">
+                </label>
+                <p class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="${registerUserRequest.email}"></p>
+            </div>
+            <div class="field-container">
+                <label>Password
+                    <input type="password" th:field="${registerUserRequest.password}">
+                </label>
+                <p class="error-hint" th:if="${#fields.hasErrors('password')}" th:errors="${registerUserRequest.password}"></p>
+            </div>
+            <div class="field-container">
+                <label>Confirm Password
+                    <input type="password" th:field="${registerUserRequest.confirmPassword}">
+                </label>
+                <p class="error-hint" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="${registerUserRequest.confirmPassword}"></p>
+            </div>
+            <button class="submit-button" type="submit">Sign Up</button>
+        </form>
+        <p class="sign-in-hint">Already have an account? <a href="/login">Sign in</a></p>
+    </main>
 </body>
 </html>

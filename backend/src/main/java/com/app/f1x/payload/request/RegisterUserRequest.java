@@ -10,11 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserRegisterRequest {
-
-    @NotEmpty
-    @Email
-    private String email;
+public class RegisterUserRequest {
 
     @NotEmpty
     private String firstName;
@@ -22,7 +18,11 @@ public class UserRegisterRequest {
     @NotEmpty
     private String lastName;
 
-    @Size(min = 6, max = 32, message = "Password must be 6-32 characters long")
+    @NotEmpty
+    @Email
+    private String email;
+
+    @Size(min = 6, max = 24, message = "must only be 6-24 characters long")
     private String password;
 
     private String confirmPassword;
