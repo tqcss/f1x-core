@@ -1,111 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>F1+X: Laundry System</title>
+    <title></title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}" />
     <link rel="stylesheet" th:href="@{/styles/home.css}" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
 </head>
-<body> 
-    <header>
-        <img class="Logo" onclick="window.location.href='/app/home';" th:src="@{/assets/logo.png}" alt="Logo">
-        <nav>
-            <ul class="sidebar">
-                <li><a href="/app/home"><img th:src="@{/assets/homeButton.png}" alt="Home"></a></li>
-                <li><a href="/app/order"><img th:src="@{/assets/orderButton.png}" alt="Order"></a></li>
-                <li><a href="/app/inventory"><img th:src="@{/assets/inventoryButton.png}" alt="Inventory"></a></li>
-                <li><a href="/app/employee"><img th:src="@{/assets/employeesButton.png}" alt="Employee"></a></li>
+<body>
+    <div class="background-image"></div>
+    <nav>
+        <a class="nav-option-container" th:href="@{/app/home}">
+            <img th:src="@{/assets/home-icon.png}" alt="">
+            <p>HOME</p>
+        </a>
+        <a class="nav-option-container">
+            <img th:src="@{/assets/order-icon.png}" alt="">
+            <p>ORDERS</p>
+        </a>
+        <a class="nav-option-container">
+            <img th:src="@{/assets/inventory-icon.png}" alt="">
+            <p>INVENTORY</p>
+        </a>
+        <a class="nav-option-container">
+            <img th:src="@{/assets/employee-icon.png}" alt="">
+            <p>EMPLOYEES</p>
+        </a>
+        <a class="nav-option-container top-margin" th:href="@{/logout}">
+            <img th:src="@{/assets/sign-out-icon.png}" alt="">
+            <p>SIGN OUT</p>
+        </a>
+    </nav>
 
-                <li class="spaced-top"><a href="/login"><img th:src="@{/assets/accountButton.png}" alt="Account"></a></li>
-                <li><a href="/app/logout"><img th:src="@{/assets/logoutButton.png}" alt="Logout"></a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="main-container">
-        <main class="content-area">
-            <h1>Dashboard</h1>
-            <div class="service-grid">
-                <!-- Your service items are good -->
-                <div class="service-item">
-                    <img th:src="@{/assets/washAndFold.png}" alt="Wash and Fold Icon">Wash and Fold
+    <main>
+        <div class="content-area">
+            <div class="greeting-section">
+                <div>
+                    <p>Hello,</p>
+                    <h3>name-placeholder</h3>
                 </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/washAndIron.png}" alt="Wash and Iron Icon">Wash and Iron
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/dryCleaning.png}" alt="Dry Cleaning Icon">Dry Cleaning
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/beddings.png}" alt="Beddings Icon">Beddings
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/curtains.png}" alt="Curtains Icon">Curtains
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/carpetsRugs.png}" alt="Carpets and Rugs Icon">Carpets/Rugs
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/delicateGarments.png}" alt="Delicate Garments Icon">Delicate Garments
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/leatherGarments.png}" alt="Leather Garments Icon">Leather Garments
-                </div>
-                <div class="service-item">
-                    <img th:src="@{/assets/suedeGarments.png}" alt="Suede Garments Icon">Suede Garments
+                <div class="date-info-container">
+                    <p>day-placeholder</p>
+                    <p>date-time-placeholder</p>
                 </div>
             </div>
-        </main>
-
-        <aside class="quick-actions">
-            <h2><i class="fas fa-bolt"></i> QUICK ACTIONS</h2>
-
-            <div class="details-section customer-details">
-                <h3>CUSTOMER DETAILS</h3>
-                <div class="form-and-order-no">
-                    <div class="form-fields">
-                        <label for="cust-name">Name</label>
-                        <input type="text" id="cust-name" name="cust-name" />
-                        <label for="cust-contact">Contact Number</label>
-                        <input type="text" id="cust-contact" name="cust-contact" />
+            <div class="nl-alert">
+                <div class="nl-alert-info-container">
+                    <div class="nl-alert-info">
+                        <h3>Oh noes!</h3>
+                        <p>Looks like you're not part of a laundromat yet, some features may be disabled.</p>
                     </div>
-                    <div class="order-number">
-                        <span>ORDER NO:</span>
-                        <span class="order-id">#0000</span>
-                    </div>
+                    <img class="shake-lr-normal" th:src="@{/assets/exclamation-icon.png}" alt="" draggable="false">
+                </div>
+                <div class="nl-alert-options">
+                    <form>
+                        <p>Create a new laundromat</p>
+                        <button>Create</button>
+                    </form>
+                    <div class="v-line"></div>
+                    <form>
+                        <p>Join an existing laundromat</p>
+                        <label>
+                            <input type="text" placeholder="Invite Code">
+                        </label>
+                        <button>Join</button>
+                    </form>
                 </div>
             </div>
-
-            <div class="details-section order-details">
-                <h3>ORDER DETAILS</h3>
-                <ul class="order-item-list">
-                    <li class="order-item">
-                        <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
-                        <span class="quantity">2</span>
-                        <span class="description">WASH & FOLD</span>
-                        <span class="price">P00.00</span>
-                        <button class="remove-item" title="Remove Item"><i class="fas fa-times-circle"></i></button>
-                    </li>
-                    <li class="order-item">
-                        <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
-                        <span class="quantity">1</span>
-                        <span class="description">WASH & IRON</span>
-                        <span class="price">P00.00</span>
-                        <button class="remove-item" title="Remove Item"><i class="fas fa-times-circle"></i></button>
-                    </li>
-                </ul>
+        </div>
+        <aside>
+            <div class="order-header">
+                <h3>Order Details</h3>
+                <p>#000000</p>
             </div>
-
-            <div class="total-section">
-                <span><i class="fas fa-receipt"></i> TOTAL:</span> <span class="total-price">P000.00</span>
-            </div>
-
-            <div class="action-buttons footer-buttons">
-                <button class="hold-button"><i class="fas fa-pause-circle"></i> HOLD ORDER</button>
-                <button class="proceed-button"><i class="fas fa-check-circle"></i> PROCEED</button>
-            </div>
+            <form>
+                <label class="text-field-area">Customer Name
+                    <input type="text">
+                </label>
+                <label class="text-field-area">Customer Contact
+                    <input type="text">
+                </label>
+                <div class="h-line"></div>
+                <div class="submit-options">
+                    <button type="submit">Place Order</button>
+                    <a href="/app/home">Clear Order</a>
+                </div>
+            </form>
+            <div class="feature-lock"></div>
         </aside>
-    </div>
+    </main>
 </body>
 </html>

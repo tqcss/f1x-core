@@ -18,6 +18,11 @@
     src: url("../fonts/Bungee-Regular.ttf");
 }
 
+@font-face {
+    font-family: Roboto-medium;
+    src: url("../fonts/Roboto/Roboto-Medium.ttf");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -55,4 +60,57 @@ h1, h2, h3, p, label, a {
 .error-hint {
     color: #e34040;
     font-family: Poppins-light, serif;
+}
+
+nav {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    height: calc(100svh - 40px);
+    padding: 20px 8px;
+    background-color: #121214;
+    gap: 8px;
+    align-items: flex-start;
+    box-shadow: 0 0 12px rgba(17, 17, 17, 0.8);
+    top: 0;
+    left: 0;
+}
+
+.nav-option-container {
+    align-items: center;
+    position: relative;
+    border: solid 1px #1D1D1E;
+    background-color: #1D1D1E;
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    transition: border 0.4s ease, background-color 0.4s ease;
+}
+
+.nav-option-container:hover {
+    border: solid 1px #fff;
+    background-color: #333;
+    transition: 0s;
+}
+
+.nav-option-container > img {
+    height: 35px;
+    position: relative;
+    top: -6px;
+}
+
+.nav-option-container > p {
+    position: absolute;
+    font-family: Roboto-medium, serif;
+    font-size: 0.55rem;
+    bottom: 6px;
+    color: #fff;
+}
+
+.top-margin {
+    margin-top: auto;
 }
