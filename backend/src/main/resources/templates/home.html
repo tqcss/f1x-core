@@ -53,9 +53,12 @@
                     <img class="shake-lr-normal" th:src="@{/assets/exclamation-icon.png}" alt="" draggable="false">
                 </div>
                 <div class="nl-alert-options">
-                    <form>
+                    <form th:action="@{app/laundromat/create}">
                         <p>Create a new laundromat</p>
-                        <button>Create</button>
+                        <label>
+                            <input type="text" placeholder="Laundromat Name">
+                        </label>
+                        <button type="submit">Create</button>
                     </form>
                     <div class="v-line"></div>
                     <form>
@@ -63,7 +66,7 @@
                         <label>
                             <input type="text" placeholder="Invite Code">
                         </label>
-                        <button>Join</button>
+                        <button type="submit">Join</button>
                     </form>
                 </div>
             </div>
