@@ -122,6 +122,7 @@ nav {
     color: #fff;
     font-family: Poppins-light, serif;
     font-size: 1rem;
+    box-shadow: 0 0 12px rgba(17, 17, 17, 0.8); 
 }
 
 .feature-lock {
