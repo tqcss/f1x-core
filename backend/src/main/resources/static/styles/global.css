@@ -114,3 +114,31 @@ nav {
 .top-margin {
     margin-top: auto;
 }
+
+.default-card {
+    padding: 20px 30px;
+    background-color: #121214;
+    border-radius: 10px;
+    color: #fff;
+    font-family: Poppins-light, serif;
+    font-size: 1rem;
+}
+
+.feature-lock {
+    display: block;
+    position: absolute;
+    background-color: rgba(18, 18, 20, 0.7);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    cursor: not-allowed;
+}
+
+.nav-option-wrapper {
+    position: relative;
+}
+
+.error-field::placeholder {
+    color: #be2e2e;
+}

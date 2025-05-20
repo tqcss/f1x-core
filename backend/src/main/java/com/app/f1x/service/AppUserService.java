@@ -63,4 +63,16 @@ public class AppUserService implements UserDetailsService {
         }
     }
 
+    public Boolean userInLaundromat(String requesterIdentity) {
+        Optional<AppUser> optionalRequester = appUserRepository.findAppUserByEmail(requesterIdentity);
+
+        if (optionalRequester.isEmpty()) {
+            logger.error("Requester not found with identity: {}", requesterIdentity);
+            return false;
+        }
+
+        AppUser requester = optionalRequester.get();
+        return requester.getLaundromat() != null;
+    }
+
 }

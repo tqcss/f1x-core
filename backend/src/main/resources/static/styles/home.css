@@ -72,7 +72,7 @@ aside > form {
 
 .v-line {
     background-color: #444;
-    height: 45px;
+    height: 60px;
     width: 1px;
 }
 
@@ -125,12 +125,6 @@ aside > form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px;
-    background-color: #121214;
-    border-radius: 10px;
-    color: #fff;
-    font-family: Poppins-light, serif;
-    font-size: 1rem;
 }
 
 .greeting-section > .date-info-container {
@@ -139,12 +133,6 @@ aside > form {
 }
 
 .nl-alert {
-    padding: 20px 30px;
-    background-color: #121214;
-    border-radius: 10px;
-    color: #fff;
-    font-family: Poppins-light, serif;
-    font-size: 1rem;
     margin-top: 20px;
 }
 
@@ -164,10 +152,6 @@ aside > form {
     /*color: #D17F49;*/
 }
 
-.nl-alert-info > p {
-    font-size: 0.9rem;
-}
-
 .nl-alert-options {
     display: flex;
     flex-direction: row;
@@ -175,11 +159,26 @@ aside > form {
     gap: 20px;
     font-size: 0.9rem;
     color: #aaa;
+    margin-top: 20px;
 }
 
 .nl-alert-options > form {
     flex-grow: 1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nl-alert-options label {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     text-align: center;
+}
+
+.nl-alert-options input {
+    flex-grow: 1;
 }
 
 .nl-alert-options button {
@@ -187,8 +186,9 @@ aside > form {
     background-color: #A8C7FA;
     border: none;
     border-radius: 5px;
-    padding: 5px 20px;
+    padding: 6px 20px;
     transition: background-color 0.4s ease;
+    max-height: 55px;
 }
 
 .nl-alert-options button:hover {
@@ -204,18 +204,11 @@ aside > form {
     background-color: #121214;
     color: #fff;
     font-family: Poppins-light, serif;
-    width: 60%;
+    flex-grow: 1;
 }
 
-.feature-lock {
-    display: block;
-    position: absolute;
-    background-color: rgba(18, 18, 20, 0.7);
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    cursor: not-allowed;
+.error-hint {
+    font-size: 0.8rem;
 }
 
 @keyframes shake-lr-normal {0%, 25% { transform: rotate(0deg); transform-origin: 50% 50%; } 2.5% { transform: rotate(8deg); } 5%, 10%, 15% { transform: rotate(-10deg); } 7.5%, 12.5%, 17.5% { transform: rotate(10deg); } 20% { transform: rotate(-8deg); } 22.5% { transform: rotate(8deg);} }

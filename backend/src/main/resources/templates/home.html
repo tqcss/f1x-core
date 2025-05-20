@@ -14,18 +14,27 @@
             <img th:src="@{/assets/home-icon.png}" alt="">
             <p>HOME</p>
         </a>
-        <a class="nav-option-container">
-            <img th:src="@{/assets/order-icon.png}" alt="">
-            <p>ORDERS</p>
-        </a>
-        <a class="nav-option-container">
-            <img th:src="@{/assets/inventory-icon.png}" alt="">
-            <p>INVENTORY</p>
-        </a>
-        <a class="nav-option-container">
-            <img th:src="@{/assets/employee-icon.png}" alt="">
-            <p>EMPLOYEES</p>
-        </a>
+        <div class="nav-option-wrapper">
+            <a class="nav-option-container" th:href="@{/app/home}">
+                <img th:src="@{/assets/order-icon.png}" alt="">
+                <p>ORDERS</p>
+            </a>
+            <div th:if="${!userInLaundromat}" class="feature-lock"></div>
+        </div>
+        <div class="nav-option-wrapper">
+            <a class="nav-option-container">
+                <img th:src="@{/assets/inventory-icon.png}" alt="">
+                <p>INVENTORY</p>
+            </a>
+            <div th:if="${!userInLaundromat}" class="feature-lock"></div>
+        </div>
+        <div class="nav-option-wrapper">
+            <a class="nav-option-container">
+                <img th:src="@{/assets/employee-icon.png}" alt="">
+                <p>EMPLOYEES</p>
+            </a>
+            <div th:if="${!userInLaundromat}" class="feature-lock"></div>
+        </div>
         <a class="nav-option-container top-margin" th:href="@{/logout}">
             <img th:src="@{/assets/sign-out-icon.png}" alt="">
             <p>SIGN OUT</p>
@@ -34,7 +43,7 @@
 
     <main>
         <div class="content-area">
-            <div class="greeting-section">
+            <div class="default-card greeting-section">
                 <div>
                     <p>Hello,</p>
                     <h3>name-placeholder</h3>
@@ -44,7 +53,7 @@
                     <p>date-time-placeholder</p>
                 </div>
             </div>
-            <div class="nl-alert">
+            <div th:if="${!userInLaundromat}" class="default-card nl-alert">
                 <div class="nl-alert-info-container">
                     <div class="nl-alert-info">
                         <h3>Oh noes!</h3>
@@ -53,18 +62,19 @@
                     <img class="shake-lr-normal" th:src="@{/assets/exclamation-icon.png}" alt="" draggable="false">
                 </div>
                 <div class="nl-alert-options">
-                    <form th:action="@{app/laundromat/create}">
-                        <p>Create a new laundromat</p>
+                    <form method="post" th:action="@{/app/laundromat/create}" th:object="${createLaundromatRequest}">
                         <label>
-                            <input type="text" placeholder="Laundromat Name">
+                            <p>Create a new laundromat</p>
+                            <input th:field="${createLaundromatRequest.laundromatName}" type="text" placeholder="Laundromat Name">
+                            <p th:if="${param.createLaundromatFail != null}" class="error-hint">invalid laundromat name</p>
                         </label>
                         <button type="submit">Create</button>
                     </form>
                     <div class="v-line"></div>
                     <form>
-                        <p>Join an existing laundromat</p>
                         <label>
-                            <input type="text" placeholder="Invite Code">
+                            <p>Join an existing laundromat</p>
+                            <input type="text" placeholder="Invite Code" name="inviteCode">
                         </label>
                         <button type="submit">Join</button>
                     </form>
@@ -89,7 +99,7 @@
                     <a href="/app/home">Clear Order</a>
                 </div>
             </form>
-            <div class="feature-lock"></div>
+            <div th:if="${!userInLaundromat}" class="feature-lock"></div>
         </aside>
     </main>
 </body>
