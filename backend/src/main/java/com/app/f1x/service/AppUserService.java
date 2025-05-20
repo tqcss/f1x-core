@@ -1,7 +1,9 @@
 package com.app.f1x.service;
 
 import com.app.f1x.model.AppUser;
+import com.app.f1x.model.Laundromat;
 import com.app.f1x.payload.request.RegisterUserRequest;
+import com.app.f1x.payload.response.UserDetailsResponse;
 import com.app.f1x.repository.AppUserRepository;
 import com.app.f1x.util.enums.UserRole;
 import org.slf4j.Logger;
@@ -39,6 +41,10 @@ public class AppUserService implements UserDetailsService {
                 .build()).orElse(null);
     }
 
+    private void logIdentityNotFound(String identity) {
+        logger.error("Requester not found with identity: {}", identity);
+    }
+
     public Optional<AppUser> findAppUserByEmail(String email) {
         return appUserRepository.findAppUserByEmail(email);
     }
@@ -63,11 +69,11 @@ public class AppUserService implements UserDetailsService {
         }
     }
 
-    public Boolean userInLaundromat(String requesterIdentity) {
-        Optional<AppUser> optionalRequester = appUserRepository.findAppUserByEmail(requesterIdentity);
+    public Boolean userInLaundromat(String identity) {
+        Optional<AppUser> optionalRequester = appUserRepository.findAppUserByEmail(identity);
 
         if (optionalRequester.isEmpty()) {
-            logger.error("Requester not found with identity: {}", requesterIdentity);
+            logIdentityNotFound(identity);
             return false;
         }
 
@@ -75,4 +81,22 @@ public class AppUserService implements UserDetailsService {
         return requester.getLaundromat() != null;
     }
 
+    public UserDetailsResponse getUserDetails(String identity) {
+        Optional<AppUser> optionalAppUser = appUserRepository.findAppUserByEmail(identity);
+
+        if (optionalAppUser.isEmpty()) {
+            logIdentityNotFound(identity);
+            return UserDetailsResponse.builder().build();
+        }
+
+        AppUser appUser = optionalAppUser.get();
+        Laundromat laundromat = appUser.getLaundromat();
+
+        return UserDetailsResponse.builder()
+                .fullName(String.format("%s %s", appUser.getFirstName(), appUser.getLastName()))
+                .inLaundromat(laundromat != null)
+                .laundromatName(laundromat != null ? laundromat.getName() : null)
+                .build();
+
+    }
 }
