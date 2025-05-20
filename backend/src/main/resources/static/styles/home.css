@@ -127,6 +127,18 @@ aside > form {
     align-items: center;
 }
 
+.greeting-section h3, p {
+    font-family: Poppins-medium, serif;
+}
+
+.greeting-section h3 {
+    font-size: 1.2rem;
+}
+
+.greeting-section p {
+    font-size: 1rem;
+}
+
 .greeting-section > .date-info-container {
     font-size: 0.8rem;
     text-align: end;
