@@ -113,9 +113,16 @@ main {
     background-color: #E29A5B;
     padding: 5px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     display: grid;
     place-items: center;
+    height: 30px;
+    width: 30px;
+}
+
+.employee-card-right-section img {
+    height: 20px;
+    width: 20px;
 }
 
 .employee-card-right-section > button:hover {
