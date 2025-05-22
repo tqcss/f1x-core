@@ -1,311 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@300;400;500&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    height: 100vh;
-    font-family: 'Bungee', sans-serif;
-    background: url('../assets/bg.png') no-repeat center center fixed;
-    background-size: cover;
-}
-
-
-/* Sidebar container */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80px; /* Enough space for images */
-    height: 100vh;
-    background-color: #000000;
+main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-top: 10px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    width: calc(100% - 136px);
+    height: calc(100svh - 80px);
+    padding: 40px 30px;
+    margin-left: 76px;
+    overflow: auto;
+    gap: 30px;
 }
 
-/* Logo */
-.Logo {
-    width: 80px;
-    height: auto;
-    margin-bottom: 10px;
-    cursor: pointer;
+.right-header-section > div > label {
+    display: block;
+    margin-top: 5px;
 }
 
-/* Navigation */
-nav {
-    width: 100%;
+.right-header-section img {
+    transform: rotateZ(0deg);
 }
 
-.sidebar {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+.button-section > form {
+    height: 35px;
+    width: 35px;
+    margin-left: 5px;
 }
 
-.sidebar li {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.sidebar li a {
-    display: inline-block;
-    width: 100%;
-    padding: 1px 0;
-    transition: background 0.3s ease;
-}
-
-.sidebar li a img {
-    width: 50px;
-    height: auto;
-    max-width: 80%;
-    transition: transform 0.2s ease;
-}
-
-.sidebar li a:hover img {
-    transform: scale(1.1);
-}
-
-.sidebar li.spaced-top {
-    margin-top: 390px; /* Adjust as needed */
-}
-
-.main-content {
-    margin-left: 80px; /* Matches the sidebar width */
-    width: calc(100% - 80px); /* Fills remaining space */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align content to the top */
-    padding-top: 100px; /* Push it down a bit from top */
-    min-height: 100vh; /* Allow scrolling if needed */
-    box-sizing: border-box;
-    flex-direction: column; /* Aligns content vertically */
-}
-
-.title-header {
-    position: absolute;
-    top: 10px; /* Adjust this as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 1;
-    padding: 0 20px;
-}
-
-.title-header h1 {
-    font-family: 'Bungee', sans-serif;
-    font-size: 5rem;
-    font-weight: 800;
-    color: white;
-    margin: 0;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-}
-
-/* Responsive tweak */
-@media (max-width: 768px) {
-    header {
-        width: 70px;
-        padding-top: 10px;
-    }
-
-    .Logo {
-        width: 40px;
-        margin-bottom: 20px;
-    }
-
-    .sidebar li a img {
-        width: 30px;
-    }
-}
-/* Navigation tools (Search, Sort, Pagination) */
-.nav-tools {
-    width: 80%;
-    height: 10%;
-    display: flex;
-    justify-content: center; /* Center the tools */
-    align-items: center;
-    margin-bottom: 20px;
-    background-color: rgba(26, 27, 38, 0.907);/* Dark blue background */
-    padding: 15px;
-    border-radius: 8px;
-    position: absolute;
-    top: 28.2%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Input and select elements inside nav-tools */
-.nav-tools input{
-    border: 1px solid #3f51b5; /* Blue border */
-    border-radius: 5px;
-    background-color:  #29292D; /* Slightly darker blue background */
-    color: #a5a5a5; /* Light grey placeholder color */
-    margin: 0 10px;
-    transition: all 0.3s ease;
-}
-.nav-tools select{
-    padding: 12px 20px;
-    font-size: 1rem;
-    border: 1px solid #3f51b5; /* Blue border */
-    border-radius: 5px;
-    background-color:  #29292D; /* Slightly darker blue background */
-    color: #a5a5a5; /* Light grey placeholder color */
-    margin: 0 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-
-.nav-tools input{
-    width: 800px;
-}
-/* Hover effect for input and select */
-.nav-tools input:hover,
-.nav-tools select:hover {
-    border-color: #ffffff; /* Lighter border on hover */
-    background-color: rgba(26, 27, 38, 0.907); /* Lighter blue background */
-}
-
-/* Pagination buttons */
-.nav-tools .pagination button {
-    background-color: #29292D; /* Green background */
-    color: white;
-    padding: 12px 20px;
-    font-size: 1.5rem;
+.button-section button {
+    background-color: #059862;
+    height: 35px;
+    width: 35px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-/* Pagination button hover effect */
-.nav-tools .pagination button:hover {
-    color:  #6e6c6c93; /* Darker green on hover */
+.button-section img {
+    height: 100%;
 }
 
-/* Product container */
-.product-container {
-    background-color: rgba(26, 27, 38, 0.907);
-    padding: 30px;
-    border-radius: 6px;
-    width: 80%;
+
+.number-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    justify-items: center; /* Center product cards within the grid */
-    margin-top: 20px;
-
-    /* Center the entire product-container */
-    position: absolute;
-    top: 50.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    overflow: auto; /* Add this to ensure content is scrollable if needed */
-    max-height: 80vh; /* Add this to limit container height (adjust as needed) */
-}
-
-/* Product card */
-.product-card {
-    background-color: #29292D; /* Dark blue card background */
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px #29292D; /* Slightly larger shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 250px;
-    cursor:pointer;
-}
-
-/* Hover effect for product cards */
-.product-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 8px 16px rgba(26, 27, 38, 0.907); /* Larger shadow on hover */
-}
-.product-card i {
-    margin-right: 5px;
-    color: #610cff;
-}
-
-/* Product name */
-.product-name {
-    font-size: 1.0rem;
-    font-weight: 700;
-    color: #ffffff;
     text-align: center;
+    font-family: Poppins-medium, serif;
 }
 
-/* Product details */
-.product-id,
-.reorder-level,
-.stock-level {
-    font-size: 0.9rem;
-    color: #f5f3f3;
-    margin-top: 10px;
+.number-input::placeholder {
+    font-family: Poppins-light, serif;
+    font-size: 1.2rem;
+    position: relative;
+    left: 9px;
+    top: 2px;
 }
 
-.status-in-stock {
-    color: green;
-    font-weight: 700;
-}
-
-.status-low-stock {
-    color: orange;
-    font-weight: 700;
-}
-
-.status-out-of-stock {
-    color: red;
-    font-weight: 700;
-}
-
-
-
-/* Search input field */
-#search-bar {
-    padding: 12px 20px;
-    font-size: 1rem;
-    border: 1px solid #3f51b5; /* Blue border */
+.header-card input {
+    background-color: transparent;
+    border: 1px solid #444;
     border-radius: 5px;
-    color: #ffffff; /* Text color */
-    margin: 0 10px;
-    transition: all 0.3s ease;
-}
-
-/* Placeholder text color */
-#search-bar::placeholder {
-    color: #a5a5a5; /* Light grey placeholder color */
-}
-
-/* Hover effect for search input */
-#search-bar:hover {
-    border-color: #ffffff; /* Lighter border on hover */
-    background-color: rgba(26, 27, 38, 0.907);  /* Lighter blue background */
-}
-
-.add-btn {
-    align-self: center; /* Aligns the button to the left */
-    margin-top: 265px;
-    margin-left: 1103px;
-    width: 200px;
-    height: 40px;
-    padding: 6px 12px;
-    background-color: #0B0084;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: 'Bungee', sans-serif;
-}
-.add-btn:hover {
-    background-color: #218838;
+    color: #fff;
+    padding: 5px 10px;
 }

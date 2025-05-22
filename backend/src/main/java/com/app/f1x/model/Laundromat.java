@@ -50,4 +50,12 @@ public class Laundromat {
     @Setter
     private LocalDateTime inviteExpiry;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laundromat")
+    @Setter
+    private List<Product> products;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laundromat")
+    @Setter
+    private List<ServiceProduct> services;
+
 }

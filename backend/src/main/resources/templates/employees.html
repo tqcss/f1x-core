@@ -76,7 +76,7 @@
                     </div>
                     <form th:if="${laundromatDetails.laundromatCreator && laundromatDetails.laundromatCreatorEmail != employee.email}" class="employee-card-right-section" th:action="@{/app/laundromat/remove-employee}" method="post">
                         <input type="hidden" name="employeeEmail" th:value="${employee.email}">
-                        <button type="submit"><img th:src="@{/assets/remove-icon2.png}" alt="" draggable="false"></button>
+                        <button style="background-color: #d04141" type="submit"><img th:src="@{/assets/remove-icon2.png}" alt="" draggable="false"></button>
                     </form>
                 </div>
             </div>

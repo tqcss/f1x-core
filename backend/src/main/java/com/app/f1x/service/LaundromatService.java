@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -57,6 +58,7 @@ public class LaundromatService {
             laundromat.setName(request.getLaundromatName());
             laundromat.setCreator(appUser);
             laundromat.setUsers(List.of(appUser));
+            laundromat.setProducts(Collections.emptyList());
             appUser.setLaundromat(laundromat);
 
             laundromatRepository.save(laundromat);

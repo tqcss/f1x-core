@@ -12,6 +12,7 @@ main {
 .header-card {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .header-card p {
@@ -131,6 +132,10 @@ main {
 
 .employee-card-right-section > img {
     height: 20px;
+}
+
+.employee-wrapper {
+    position: relative;
 }
 
 .not-found-hint {

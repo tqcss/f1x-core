@@ -8,6 +8,8 @@ main {
     padding: 30px;
     overflow: auto;
     height: calc(100svh - 60px);
+    display: flex;
+    flex-direction: column;
 }
 
 aside {
@@ -221,6 +223,36 @@ aside > form {
 
 .error-hint {
     font-size: 0.8rem;
+}
+
+.default-input {
+    background-color: transparent;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.service-container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.service-card {
+    position: relative;
+    background-color: #222;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    transition: 0.4s ease;
+}
+
+.service-card:hover {
+    background-color: #444;
+    border-color: #aaa;
+    transition: 0s;
 }
 
 @keyframes shake-lr-normal {0%, 25% { transform: rotate(0deg); transform-origin: 50% 50%; } 2.5% { transform: rotate(8deg); } 5%, 10%, 15% { transform: rotate(-10deg); } 7.5%, 12.5%, 17.5% { transform: rotate(10deg); } 20% { transform: rotate(-8deg); } 22.5% { transform: rotate(8deg);} }

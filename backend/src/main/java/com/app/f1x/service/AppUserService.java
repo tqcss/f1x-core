@@ -94,6 +94,7 @@ public class AppUserService implements UserDetailsService {
 
         return UserDetailsResponse.builder()
                 .fullName(fullName)
+                .email(identity)
                 .build();
     }
 
