@@ -66,4 +66,8 @@ public class AppUser {
     @Setter
     private Laundromat laundromat;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "appUser")
+    @Setter
+    private Order currentOrder;
+
 }

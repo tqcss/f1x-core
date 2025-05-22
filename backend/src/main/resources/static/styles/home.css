@@ -14,10 +14,10 @@ main {
 
 aside {
     position: relative;
-    height: calc(100svh - 80px);
+    height: calc(100svh - 40px);
     width: 33svw;
     min-width: 400px;
-    padding: 40px 30px;
+    padding: 40px 30px 0 30px;
     background-color: #121214;
     box-shadow: 0 0 12px rgba(17, 17, 17, 0.8);
     overflow: auto;
@@ -80,12 +80,13 @@ aside > form {
 
 .submit-options {
     display: flex;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 0 ;
+    right: 0 ;
     padding: 40px 30px 20px 30px;
     background-color: #121214;
-    width: calc(100% - 60px);
+    width: 33%;
+    min-width: 400px;
     gap: 10px;
 }
 
@@ -107,11 +108,11 @@ aside > form {
     transition: 0s;
 }
 
-.submit-options > button {
+.submit-options button {
     background-color: #059862;
 }
 
-.submit-options > button:hover {
+.submit-options button:hover {
     background-color: #048052;
 }
 
@@ -234,8 +235,12 @@ aside > form {
 }
 
 .service-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 5fr));
+    /*grid-template-rows: auto;*/
+    gap: 5px;
+    align-items: center;
+    justify-items: center;
     overflow: auto;
 }
 
@@ -253,6 +258,34 @@ aside > form {
     background-color: #444;
     border-color: #aaa;
     transition: 0s;
+}
+
+.order-item-container {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+}
+
+.order-item-container > div {
+    background-color: #222;
+    border-radius: 10px;
+    padding: 25px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-item-container .left-order-item-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.left-order-item-section > * {
+    font-family: Poppins-medium, serif;
+    font-size: 1rem;
 }
 
 @keyframes shake-lr-normal {0%, 25% { transform: rotate(0deg); transform-origin: 50% 50%; } 2.5% { transform: rotate(8deg); } 5%, 10%, 15% { transform: rotate(-10deg); } 7.5%, 12.5%, 17.5% { transform: rotate(10deg); } 20% { transform: rotate(-8deg); } 22.5% { transform: rotate(8deg);} }

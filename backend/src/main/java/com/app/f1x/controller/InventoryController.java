@@ -54,7 +54,7 @@ public class InventoryController {
     }
 
     @PostMapping("/inventory/add")
-    public String addProduct(Authentication authentication, @RequestParam String productName, @RequestParam Integer quantity) {
+    public String addProduct(Authentication authentication, @RequestParam String productName, @RequestParam(defaultValue = "0") Integer quantity) {
         if (productName == null || productName.isEmpty() || quantity == null || quantity < 0 || productRepository.existsByName(productName)) { return "redirect:/app/inventory"; }
 
         Laundromat laundromat = appUserService.findAppUserByEmail(authentication.getName()).get().getLaundromat();

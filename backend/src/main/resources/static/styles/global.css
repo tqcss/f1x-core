@@ -144,3 +144,7 @@ nav {
 .error-field::placeholder {
     color: #be2e2e;
 }
+
+input {
+    font-family: Poppins-light, serif;
+}

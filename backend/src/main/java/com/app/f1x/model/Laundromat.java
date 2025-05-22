@@ -58,4 +58,8 @@ public class Laundromat {
     @Setter
     private List<ServiceProduct> services;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "laundromat")
+    @Setter
+    private List<Order> orders;
+
 }

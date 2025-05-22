@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,34 +15,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "service_product")
+@Table(name = "order_item")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ServiceProduct {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Integer id;
 
-    @Setter
-    private String name;
-
-    @Setter
-    private Float price;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "laundromat")
+    @JoinColumn(name = "laundry_order")
     @Setter
-    private Laundromat laundromat;
+    private Order laundryOrder;
 
-    @OneToMany(mappedBy = "serviceProduct", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "service_product")
+    private ServiceProduct serviceProduct;
+
+    @Setter
+    private Integer quantity;
 
 }
