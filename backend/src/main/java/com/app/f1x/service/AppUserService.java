@@ -96,4 +96,5 @@ public class AppUserService implements UserDetailsService {
                 .fullName(fullName)
                 .build();
     }
+
 }

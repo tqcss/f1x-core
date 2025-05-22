@@ -59,10 +59,25 @@
         </div>
         <div class="employee-panel default-card">
             <h3>Employees</h3>
-            <div class="employee-container">
-                <div class="not-found-hint">
+            <div class="employee-wrapper">
+                <div th:if="${laundromatDetails.employeeDetails.isEmpty()}" class="not-found-hint">
                     <img th:src="@{/assets/person-off-icon.png}" alt="" draggable="false">
                     <p>No Employees found</p>
+                </div>
+            </div>
+            <div class="employee-container">
+                <div class="employee-card" th:each="employee: ${laundromatDetails.employeeDetails}">
+                    <div class="employee-card-left-section">
+                        <img th:src="@{/assets/person-icon.png}" alt="" draggable="false">
+                        <div>
+                            <p th:text="${employee.fullName}"></p>
+                            <p class="small-text" th:text="${employee.email}"></p>
+                        </div>
+                    </div>
+                    <form th:if="${laundromatDetails.laundromatCreator && laundromatDetails.laundromatCreatorEmail != employee.email}" class="employee-card-right-section" th:action="@{/app/laundromat/remove-employee}" method="post">
+                        <input type="hidden" name="employeeEmail" th:value="${employee.email}">
+                        <button type="submit"><img th:src="@{/assets/remove-icon.png}" alt="" draggable="false"></button>
+                    </form>
                 </div>
             </div>
         </div>

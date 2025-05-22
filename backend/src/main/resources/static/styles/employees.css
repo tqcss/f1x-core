@@ -79,10 +79,51 @@ main {
     cursor: text;
 }
 
-.employee-container {
+.employee-wrapper {
     flex-grow: 1;
-    overflow: auto;
     position: relative;
+}
+
+.employee-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.employee-card {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #1D1D1E;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.employee-card-left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.employee-card-left-section > img {
+    height: 32px;
+}
+
+.employee-card-right-section > button {
+    background-color: #E29A5B;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+}
+
+.employee-card-right-section > button:hover {
+    background-color: #D17F49;
+}
+
+.employee-card-right-section > img {
+    height: 20px;
 }
 
 .not-found-hint {

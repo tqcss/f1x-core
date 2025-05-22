@@ -5,6 +5,7 @@ import com.app.f1x.model.Laundromat;
 import com.app.f1x.payload.request.CreateLaundromatRequest;
 import com.app.f1x.payload.request.JoinLaundromatRequest;
 import com.app.f1x.payload.response.LaundromatDetailsResponse;
+import com.app.f1x.payload.response.UserDetailsResponse;
 import com.app.f1x.repository.AppUserRepository;
 import com.app.f1x.repository.LaundromatRepository;
 import org.slf4j.Logger;
@@ -86,6 +87,11 @@ public class LaundromatService {
                 .isLaundromatCreator(laundromat.getCreator().getId().equals(optionalAppUser.get().getId()))
                 .laundromatName(laundromat.getName())
                 .laundromatInviteCode(getValidInviteCode(laundromat))
+                .laundromatCreatorEmail(laundromat.getCreator().getEmail())
+                .employeeDetails(laundromat.getUsers().stream().map(employee ->UserDetailsResponse.builder()
+                        .fullName(String.format("%s %s", employee.getFirstName(), employee.getLastName()))
+                        .email(employee.getEmail())
+                        .build()).toList())
                 .build();
     }
 
@@ -131,9 +137,11 @@ public class LaundromatService {
         appUser.setLaundromat(laundromat);
         appUserRepository.save(appUser);
 
-        logger.info(laundromat.getUsers().stream().map(AppUser::getEmail).toString());
-
         return true;
     }
 
+    public void removeLaundromat(AppUser appUser) {
+        appUser.setLaundromat(null);
+        appUserRepository.save(appUser);
+    }
 }
