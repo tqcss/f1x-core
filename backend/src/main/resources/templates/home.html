@@ -15,21 +15,21 @@
             <p>HOME</p>
         </a>
         <div class="nav-option-wrapper">
-            <a class="nav-option-container" th:href="@{/app/home}">
+            <a class="nav-option-container" th:href="@{/app/orders}">
                 <img th:src="@{/assets/order-icon.png}" alt="">
                 <p>ORDERS</p>
             </a>
             <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
         </div>
         <div class="nav-option-wrapper">
-            <a class="nav-option-container">
+            <a class="nav-option-container" th:href="@{/app/inventory}">
                 <img th:src="@{/assets/inventory-icon.png}" alt="">
                 <p>INVENTORY</p>
             </a>
             <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
         </div>
         <div class="nav-option-wrapper">
-            <a href="/app/employees" class="nav-option-container">
+            <a href="/app/employees" class="nav-option-container" th:href="@{/app/employees}">
                 <img th:src="@{/assets/employee-icon.png}" alt="">
                 <p>EMPLOYEES</p>
             </a>
