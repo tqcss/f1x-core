@@ -71,10 +71,11 @@
                         <button type="submit">Create</button>
                     </form>
                     <div class="v-line"></div>
-                    <form>
+                    <form method="post" th:action="@{/app/laundromat/join}" th:object="${joinLaundromatRequest}">
                         <label>
                             <p>Join an existing laundromat</p>
                             <input type="text" placeholder="Invite Code" name="inviteCode">
+                            <p th:if="${param.joinLaundromatFail != null}" class="error-hint">invite code invalid or expired</p>
                         </label>
                         <button type="submit">Join</button>
                     </form>

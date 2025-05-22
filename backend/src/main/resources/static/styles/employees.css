@@ -71,6 +71,14 @@ main {
     transform: rotateZ(-45deg);
 }
 
+.right-header-section h3 {
+    user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -webkit-user-select: text;
+    cursor: text;
+}
+
 .employee-container {
     flex-grow: 1;
     overflow: auto;

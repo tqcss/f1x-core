@@ -1,6 +1,7 @@
 package com.app.f1x.controller;
 
 import com.app.f1x.payload.request.CreateLaundromatRequest;
+import com.app.f1x.payload.request.JoinLaundromatRequest;
 import com.app.f1x.service.LaundromatService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class LaundromatController {
         if (success) {
             return "redirect:/app/home";
         } else {
-            return "redirect:/app/error";
+            return "redirect:/error";
         }
     }
 
@@ -46,6 +47,21 @@ public class LaundromatController {
     public String generateInvite(Authentication authentication, Model model) {
         laundromatService.generateLaundromatInvite(authentication.getName());
         return "redirect:/app/employees";
+    }
+
+    @PostMapping("/laundromat/join")
+    public String joinLaundromat(Authentication authentication, @Valid @ModelAttribute JoinLaundromatRequest joinLaundromatRequest, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            logger.info(bindingResult.getAllErrors().toString());
+            return "redirect:/app/home?joinLaundromatFail";
+        }
+
+        Boolean success = laundromatService.joinLaundromat(authentication.getName(), joinLaundromatRequest);
+        if (success) {
+            return "redirect:/app/home";
+        } else {
+            return "redirect:/app/home?joinLaundromatFail";
+        }
     }
 
 }

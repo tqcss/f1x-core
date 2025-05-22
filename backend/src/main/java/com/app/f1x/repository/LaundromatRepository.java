@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface LaundromatRepository extends JpaRepository<Laundromat, Integer> {
 
-    Optional<Laundromat> findLaundromatByInviteCodeAndInviteExpiryBefore(String inviteCode, LocalDateTime expiryDate);
+    Optional<Laundromat> findLaundromatByInviteCodeAndInviteExpiryIsAfter(String inviteCode, LocalDateTime expiryDate);
 
 }

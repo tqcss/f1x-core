@@ -3,6 +3,7 @@ package com.app.f1x.service;
 import com.app.f1x.model.AppUser;
 import com.app.f1x.model.Laundromat;
 import com.app.f1x.payload.request.CreateLaundromatRequest;
+import com.app.f1x.payload.request.JoinLaundromatRequest;
 import com.app.f1x.payload.response.LaundromatDetailsResponse;
 import com.app.f1x.repository.AppUserRepository;
 import com.app.f1x.repository.LaundromatRepository;
@@ -33,7 +34,7 @@ public class LaundromatService {
     }
 
     private Optional<Laundromat> findLaundromat(String inviteCode) {
-        return laundromatRepository.findLaundromatByInviteCodeAndInviteExpiryBefore(inviteCode, LocalDateTime.now());
+        return laundromatRepository.findLaundromatByInviteCodeAndInviteExpiryIsAfter(inviteCode, LocalDateTime.now());
     }
 
     private String generateInviteCode() {
@@ -78,9 +79,11 @@ public class LaundromatService {
                 .build();
         }
 
+        logger.info("{} {}", laundromat.getCreator().getId(), optionalAppUser.get().getId());
+
         return LaundromatDetailsResponse.builder()
                 .inLaundromat(true)
-                .isLaundromatCreator(laundromat.getCreator().equals(optionalAppUser.get()))
+                .isLaundromatCreator(laundromat.getCreator().getId().equals(optionalAppUser.get().getId()))
                 .laundromatName(laundromat.getName())
                 .laundromatInviteCode(getValidInviteCode(laundromat))
                 .build();
@@ -110,6 +113,27 @@ public class LaundromatService {
         LocalDateTime inviteExpiry = laundromat.getInviteExpiry();
 
         return inviteExpiry.isAfter(LocalDateTime.now()) ? inviteCode : "code-expired";
+    }
+
+    public Boolean joinLaundromat(String identity, JoinLaundromatRequest request) {
+        Optional<AppUser> optionalAppUser = appUserRepository.findAppUserByEmail(identity);
+        if (optionalAppUser.isEmpty()) { return false; }
+
+        Optional<Laundromat> optionalLaundromat = findLaundromat(request.getInviteCode().toUpperCase().strip());
+        if (optionalLaundromat.isEmpty()) {
+            logger.error("laundromat not found with code: {}", request.getInviteCode().toUpperCase().strip());
+            return false;
+        }
+
+        AppUser appUser = optionalAppUser.get();
+        Laundromat laundromat = optionalLaundromat.get();
+
+        appUser.setLaundromat(laundromat);
+        appUserRepository.save(appUser);
+
+        logger.info(laundromat.getUsers().stream().map(AppUser::getEmail).toString());
+
+        return true;
     }
 
 }

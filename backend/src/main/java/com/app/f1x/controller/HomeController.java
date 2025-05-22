@@ -2,6 +2,7 @@ package com.app.f1x.controller;
 
 import com.app.f1x.model.AppUser;
 import com.app.f1x.payload.request.CreateLaundromatRequest;
+import com.app.f1x.payload.request.JoinLaundromatRequest;
 import com.app.f1x.payload.response.LaundromatDetailsResponse;
 import com.app.f1x.payload.response.UserDetailsResponse;
 import com.app.f1x.service.AppUserService;
@@ -38,6 +39,8 @@ public class HomeController {
         String dateString = dateTime.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
 
         model.addAttribute(new CreateLaundromatRequest());
+        model.addAttribute(new JoinLaundromatRequest());
+
         model.addAttribute("userDetails", userDetails);
         model.addAttribute("laundromatDetails", laundromatDetails);
         model.addAttribute("dateTime", dateTime);
