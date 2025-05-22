@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,12 @@ public class LaundromatController {
         } else {
             return "redirect:/app/error";
         }
+    }
+
+    @PostMapping("/laundromat/generate-invite")
+    public String generateInvite(Authentication authentication, Model model) {
+        laundromatService.generateLaundromatInvite(authentication.getName());
+        return "redirect:/app/employees";
     }
 
 }

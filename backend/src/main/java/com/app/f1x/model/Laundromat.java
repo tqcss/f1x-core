@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -40,5 +41,13 @@ public class Laundromat {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "laundromat")
     @Setter
     private List<AppUser> users;
+
+    @Column(name = "invite_code")
+    @Setter
+    private String inviteCode;
+
+    @Column(name = "invite_expiry")
+    @Setter
+    private LocalDateTime inviteExpiry;
 
 }

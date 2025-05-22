@@ -19,21 +19,21 @@
                 <img th:src="@{/assets/order-icon.png}" alt="">
                 <p>ORDERS</p>
             </a>
-            <div th:if="${!userDetails.inLaundromat}" class="feature-lock"></div>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
         </div>
         <div class="nav-option-wrapper">
             <a class="nav-option-container">
                 <img th:src="@{/assets/inventory-icon.png}" alt="">
                 <p>INVENTORY</p>
             </a>
-            <div th:if="${!userDetails.inLaundromat}" class="feature-lock"></div>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
         </div>
         <div class="nav-option-wrapper">
             <a href="/app/employees" class="nav-option-container">
                 <img th:src="@{/assets/employee-icon.png}" alt="">
                 <p>EMPLOYEES</p>
             </a>
-            <div th:if="${!userDetails.inLaundromat}" class="feature-lock"></div>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
         </div>
         <a class="nav-option-container top-margin" th:href="@{/logout}">
             <img th:src="@{/assets/sign-out-icon.png}" alt="">
@@ -53,7 +53,7 @@
                     <p th:text="${dateString}">date-time-placeholder</p>
                 </div>
             </div>
-            <div th:if="${!userDetails.inLaundromat}" class="default-card nl-alert">
+            <div th:if="${!laundromatDetails.inLaundromat}" class="default-card nl-alert">
                 <div class="nl-alert-info-container">
                     <div class="nl-alert-info">
                         <h3>Oh noes!</h3>
@@ -99,7 +99,7 @@
                     <a href="/app/home">Clear Order</a>
                 </div>
             </form>
-            <div th:if="${!userDetails.inLaundromat}" class="feature-lock"></div>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
         </aside>
     </main>
 </body>

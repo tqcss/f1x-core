@@ -5,12 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetailsResponse {
+public class LaundromatDetailsResponse {
 
-    private String fullName;
+    private boolean inLaundromat;
+    private boolean isLaundromatCreator;
+    private String laundromatName;
+    private String laundromatInviteCode;
 
 }

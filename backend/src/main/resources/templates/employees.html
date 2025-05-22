@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/employees.css}" />
+</head>
+<body>
+    <div class="background-image"></div>
+    <nav>
+        <a class="nav-option-container" th:href="@{/app/home}">
+            <img th:src="@{/assets/home-icon.png}" alt="">
+            <p>HOME</p>
+        </a>
+        <div class="nav-option-wrapper">
+            <a class="nav-option-container" th:href="@{/app/home}">
+                <img th:src="@{/assets/order-icon.png}" alt="">
+                <p>ORDERS</p>
+            </a>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
+        </div>
+        <div class="nav-option-wrapper">
+            <a class="nav-option-container">
+                <img th:src="@{/assets/inventory-icon.png}" alt="">
+                <p>INVENTORY</p>
+            </a>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
+        </div>
+        <div class="nav-option-wrapper">
+            <a href="/app/employees" class="nav-option-container">
+                <img th:src="@{/assets/employee-icon.png}" alt="">
+                <p>EMPLOYEES</p>
+            </a>
+            <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
+        </div>
+        <a class="nav-option-container top-margin" th:href="@{/logout}">
+            <img th:src="@{/assets/sign-out-icon.png}" alt="">
+            <p>SIGN OUT</p>
+        </a>
+    </nav>
+
+    <main>
+        <div class="header-card default-card">
+            <div>
+                <p>Laundromat Name</p>
+                <h3 th:text="${laundromatDetails.laundromatName.toUpperCase()}">laundromat-name-placeholder</h3>
+            </div>
+            <div th:if="${laundromatDetails.isLaundromatCreator}" class="right-header-section">
+                <div>
+                    <p>Invite Code</p>
+                    <h3 th:text="${laundromatDetails.laundromatInviteCode}">code-expired</h3>
+                </div>
+                <form th:action="@{/app/laundromat/generate-invite}" method="post">
+                    <button type="submit"><img th:src="@{/assets/key-icon.png}" alt="" draggable="false"></button>
+                </form>
+            </div>
+        </div>
+        <div class="employee-panel default-card">
+            <h3>Employees</h3>
+            <div class="employee-container">
+                <div class="not-found-hint">
+                    <img th:src="@{/assets/person-off-icon.png}" alt="" draggable="false">
+                    <p>No Employees found</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

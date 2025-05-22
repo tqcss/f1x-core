@@ -90,13 +90,10 @@ public class AppUserService implements UserDetailsService {
         }
 
         AppUser appUser = optionalAppUser.get();
-        Laundromat laundromat = appUser.getLaundromat();
+        String fullName = String.format("%s %s", appUser.getFirstName(), appUser.getLastName());
 
         return UserDetailsResponse.builder()
-                .fullName(String.format("%s %s", appUser.getFirstName(), appUser.getLastName()))
-                .inLaundromat(laundromat != null)
-                .laundromatName(laundromat != null ? laundromat.getName() : null)
+                .fullName(fullName)
                 .build();
-
     }
 }
