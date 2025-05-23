@@ -78,15 +78,31 @@ aside > form {
     width: 1px;
 }
 
-.submit-options {
-    display: flex;
+.footer {
     position: fixed;
     bottom: 0;
     right: 0 ;
-    padding: 40px 30px 20px 30px;
-    background-color: #121214;
-    width: 33%;
+    width: 33svw;
     min-width: 400px;
+    border-top: 2.5px solid #222;
+    padding: 20px 30px 20px 30px;
+}
+
+.total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.total-section h3 {
+    font-family: Poppins-medium, serif;
+    font-size: 1.1rem;
+}
+
+.submit-options {
+    display: flex;
+    background-color: #121214;
     gap: 10px;
 }
 
@@ -236,7 +252,7 @@ aside > form {
 
 .service-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 5fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 5fr));
     /*grid-template-rows: auto;*/
     gap: 5px;
     align-items: center;

@@ -95,7 +95,7 @@
                     <button style="background-color: #059862; height: 40px; width: 40px; border: none; border-radius: 5px" type="submit"><img th:src="@{/assets/add-icon.png}" alt="" draggable="false"></button>
                 </form>
             </div>
-            <div class="default-card" style="display: flex; flex-direction: column; flex-grow: 1; margin-top: 10px;">
+            <div th:if="${laundromatDetails.inLaundromat}" class="default-card" style="display: flex; flex-direction: column; flex-grow: 1; margin-top: 10px;">
                 <h3 style="border-bottom: 1px solid #444; padding-bottom: 10px">Services Offered</h3>
                 <div class="service-container">
                     <div th:each="service: ${servicesOffered}" style="padding-top: 20px">
@@ -122,12 +122,12 @@
                 <h3>Order Details</h3>
                 <p th:text="${currentOrder != null ? '#' + currentOrder.id : '#000000'}"></p>
             </div>
-            <form>
+            <form method="post" th:action="@{/app/currentOrder/place}">
                 <label class="text-field-area">Customer Name
-                    <input type="text">
+                    <input type="text" name="customerName">
                 </label>
                 <label class="text-field-area">Customer Contact
-                    <input type="text">
+                    <input type="text" name="customerContact">
                 </label>
                 <div class="h-line"></div>
                 <div th:if="${currentOrder != null}">
@@ -141,9 +141,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="submit-options">
-                    <button type="submit">Place Order</button>
-                    <a href="/app/home?clearCurrentOrder">Clear Order</a>
+                <div class="footer">
+                    <input th:if="${currentOrder != null}" type="hidden" th:value="${currentOrder.id}" name="orderId">
+                    <div class="total-section">
+                        <p>Total:</p>
+                        <h3 th:text="${orderTotal != null ? 'P' + orderTotal : 'P000.00'}">P000.00</h3>
+                    </div>
+                    <div class="submit-options">
+                        <button type="submit">Place Order</button>
+                        <a href="/app/home?clearCurrentOrder">Clear Order</a>
+                    </div>
                 </div>
             </form>
             <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>

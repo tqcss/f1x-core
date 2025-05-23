@@ -48,7 +48,7 @@ public class HomeController {
         LaundromatDetailsResponse laundromatDetails = laundromatService.getLaundromatDetails(authentication.getName());
 
         Laundromat laundromat = appUserService.findAppUserByEmail(authentication.getName()).get().getLaundromat();
-        List<ServiceProduct> servicesOffered = laundromat.getServices();
+        List<ServiceProduct> servicesOffered = laundromat != null ? laundromat.getServices() : null;
         Order currentOrder = appUserService.findAppUserByEmail(authentication.getName()).get().getCurrentOrder();
 
         if (clearCurrentOrder != null) {
@@ -64,7 +64,9 @@ public class HomeController {
         }
         currentOrder = appUserService.findAppUserByEmail(authentication.getName()).get().getCurrentOrder();
 
-        servicesOffered.sort(Comparator.comparing(ServiceProduct::getId));
+        if (servicesOffered != null) {
+            servicesOffered.sort(Comparator.comparing(ServiceProduct::getId));
+        }
 
         LocalDateTime dateTime = LocalDateTime.now();
         String dateString = dateTime.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
@@ -79,6 +81,16 @@ public class HomeController {
 
         model.addAttribute("servicesOffered", servicesOffered);
         model.addAttribute("currentOrder", currentOrder);
+
+        double totalPrice = 0;
+
+        if (laundromatDetails.isInLaundromat() && currentOrder != null && currentOrder.getOrderItems() != null) {
+            totalPrice = currentOrder.getOrderItems().stream()
+                    .mapToDouble(item -> item.getQuantity() * item.getServiceProduct().getPrice())
+                    .sum();
+        }
+
+        model.addAttribute("orderTotal", totalPrice);
 
         return "home";
     }

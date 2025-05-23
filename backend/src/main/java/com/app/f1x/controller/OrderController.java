@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,5 +102,36 @@ public class OrderController {
 
         return "redirect:/app/home";
     }
+
+    @Transactional
+    @PostMapping("/currentOrder/place")
+    public String placeOrder(@RequestParam(defaultValue = "anonymous") String customerName, @RequestParam(required = false, defaultValue = "") String customerContact, @RequestParam Integer orderId, Authentication authentication) {
+        Order currentOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        AppUser appUser = currentOrder.getAppUser();
+
+        currentOrder.setCustomerName(customerName);
+        currentOrder.setCustomerContact(customerContact);
+        currentOrder.setOrderDateTime(LocalDateTime.now());
+        currentOrder.setCashierId(appUser.getId());
+        currentOrder.setLaundromat(appUser.getLaundromat());
+
+        orderRepository.save(currentOrder);
+
+        appUser.setCurrentOrder(null);
+        appUserRepository.save(appUser);
+
+        Order newOrder = new Order();
+        newOrder.setAppUser(appUser);
+        newOrder.setLaundromat(appUser.getLaundromat());
+        orderRepository.save(newOrder);
+
+        appUser.setCurrentOrder(newOrder);
+        appUserRepository.save(appUser);
+
+        return "redirect:/app/home";
+    }
+
 
 }

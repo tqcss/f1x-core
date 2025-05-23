@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -33,7 +34,7 @@ public class Order {
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cashier")
+    @JoinColumn(name = "appUser")
     @Setter
     private AppUser appUser;
 
@@ -51,5 +52,11 @@ public class Order {
     @JoinColumn(name = "laundromat")
     @Setter
     private Laundromat laundromat;
+
+    @Setter
+    private LocalDateTime orderDateTime;
+
+    @Setter
+    private Integer cashierId;
 
 }
