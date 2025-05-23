@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders</title>
+    <link rel="stylesheet" th:href="@{/styles/global.css}" />
+    <link rel="stylesheet" th:href="@{/styles/employees.css}" />
+</head>
+<body>
+<div class="background-image"></div>
+<nav>
+    <a class="nav-option-container" th:href="@{/app/home}">
+        <img th:src="@{/assets/home-icon.png}" alt="">
+        <p>HOME</p>
+    </a>
+    <div class="nav-option-wrapper">
+        <a class="nav-option-container" th:href="@{/app/orders}">
+            <img th:src="@{/assets/order-icon.png}" alt="">
+            <p>ORDERS</p>
+        </a>
+        <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
+    </div>
+    <div class="nav-option-wrapper">
+        <a class="nav-option-container" th:href="@{/app/inventory}">
+            <img th:src="@{/assets/inventory-icon.png}" alt="">
+            <p>INVENTORY</p>
+        </a>
+        <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
+    </div>
+    <div class="nav-option-wrapper">
+        <a class="nav-option-container" th:href="@{/app/employees}">
+            <img th:src="@{/assets/employee-icon.png}" alt="">
+            <p>EMPLOYEES</p>
+        </a>
+        <div th:if="${!laundromatDetails.inLaundromat}" class="feature-lock"></div>
+    </div>
+    <a class="nav-option-container top-margin" th:href="@{/logout}">
+        <img th:src="@{/assets/sign-out-icon.png}" alt="">
+        <p>SIGN OUT</p>
+    </a>
+</nav>
+<main>
+    <div class="employee-panel default-card">
+        <h3>Orders</h3>
+        <div class="employee-wrapper">
+            <div th:if="${orders.isEmpty()}" class="not-found-hint">
+                <img th:src="@{/assets/order-icon.png}" alt="" draggable="false">
+                <p>No Orders found</p>
+            </div>
+        </div>
+        <div class="employee-container">
+            <div class="employee-card" th:each="order : ${orders}">
+                <div class="employee-card-left-section">
+                    <img th:src="@{/assets/person-icon.png}" alt="" draggable="false">
+                    <div>
+                        <p><strong th:text="${order.customerName}"></strong></p>
+                        <p class="small-text" th:text="${order.customerContact}"></p>
+                        <p class="small-text" th:text="${#temporals.format(order.orderDateTime, 'MMM dd, yyyy HH:mm')}"></p>
+                    </div>
+                </div>
+                <div class="order-services-list" style="width: 200px;">
+                    <p class="small-text" style="margin-top: 10px;">Services:</p>
+                    <ul>
+                        <li th:each="item : ${order.orderItems}">
+                            <span th:text="${item.serviceProduct.name}"></span>
+                            <span th:text="' × ' + ${item.quantity}"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="employee-card-right-section">
+                    <div>
+                        <p class="small-text">Total</p>
+                        <h3 th:text="'P' + ${#numbers.formatDecimal(order.totalCost, 0, 'COMMA', 2, 'POINT')}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

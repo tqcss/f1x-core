@@ -4,13 +4,16 @@ import com.app.f1x.model.AppUser;
 import com.app.f1x.model.Order;
 import com.app.f1x.model.OrderItem;
 import com.app.f1x.model.ServiceProduct;
+import com.app.f1x.payload.response.LaundromatDetailsResponse;
 import com.app.f1x.repository.AppUserRepository;
 import com.app.f1x.repository.OrderItemRepository;
 import com.app.f1x.repository.OrderRepository;
 import com.app.f1x.repository.ServiceProductRepository;
 import com.app.f1x.service.AppUserService;
+import com.app.f1x.service.LaundromatService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +31,7 @@ import java.util.List;
 @RequestMapping("/app")
 public class OrderController {
 
+    private final LaundromatService laundromatService;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -37,12 +41,14 @@ public class OrderController {
     private final AppUserRepository appUserRepository;
     private final OrderRepository orderRepository;
 
-    public OrderController(AppUserService appUserService, ServiceProductRepository serviceProductRepository, OrderItemRepository orderItemRepository, AppUserRepository appUserRepository, OrderRepository orderRepository) {
+    @Autowired
+    public OrderController(AppUserService appUserService, ServiceProductRepository serviceProductRepository, OrderItemRepository orderItemRepository, AppUserRepository appUserRepository, OrderRepository orderRepository, LaundromatService laundromatService) {
         this.appUserService = appUserService;
         this.serviceProductRepository = serviceProductRepository;
         this.orderItemRepository = orderItemRepository;
         this.appUserRepository = appUserRepository;
         this.orderRepository = orderRepository;
+        this.laundromatService = laundromatService;
     }
 
     @Transactional
@@ -157,7 +163,13 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public String orders(Model model) {
+    public String orders(Authentication authentication, Model model) {
+        LaundromatDetailsResponse laundromatDetailsResponse = laundromatService.getLaundromatDetails(authentication.getName());
+        List<Order> orders = orderRepository.findAllByLaundromat_Id(appUserRepository.findAppUserByEmail(authentication.getName()).get().getLaundromat().getId());
+
+        model.addAttribute("orders", orders.reversed());
+        model.addAttribute("laundromatDetails", laundromatDetailsResponse);
+
         return "orders";
     }
 

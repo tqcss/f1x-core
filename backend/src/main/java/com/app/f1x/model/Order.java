@@ -59,4 +59,11 @@ public class Order {
     @Setter
     private Integer cashierId;
 
+    public float getTotalCost() {
+        return (float) orderItems.stream()
+                .mapToDouble(item -> item.getServiceProduct().getPrice() * item.getQuantity())
+                .sum();
+    }
+
+
 }
